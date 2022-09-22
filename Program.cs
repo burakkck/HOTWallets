@@ -1,8 +1,17 @@
+using System.Diagnostics.Eventing.Reader;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-builder.Services.AddRazorPages();
+
+builder.Services.AddRazorPages(
+    options =>
+    {
+        options.Conventions.AuthorizePage("/Main");
+        options.Conventions.AllowAnonymousToPage("/Index");
+    }
+    );
+
 
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -10,15 +19,13 @@ builder.Services.AddSession(options => {
     options.Cookie.HttpOnly = true;
 });
 
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    })
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
         options.LoginPath = "/Index";
         options.AccessDeniedPath = "/Index";
     });
+
+
 
 var app = builder.Build();
 
@@ -37,7 +44,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseSession();
+
 app.MapRazorPages();
 
 app.Run();
