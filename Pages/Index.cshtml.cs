@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Text.Json;
 using HOTWallets.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -11,16 +12,9 @@ namespace HOTWallets.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        
         [BindProperty]
-        public string Username
-        {
-            get; set;
-        }
-        [BindProperty]
-        public string Password
-        {
-            get; set;
-        }
+        public User User { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -37,17 +31,20 @@ namespace HOTWallets.Pages
             return Partial("_Register");
         }
 
-        public IActionResult OnPostSignIn()
+        public IActionResult OnPostSignIn(string username, string password)
         {
-            if (!String.IsNullOrWhiteSpace(Username) || !String.IsNullOrWhiteSpace(Password))
+            if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(username))
             {
-                if (Users.Instance.Any(x => x.Username == Username && x.Password == Password))
+                if (Users.Instance.Any(x => x.Username == username && x.Password == password))
                 {
-                    HttpContext.Session.SetString("username", Username);
+                    User = Users.Instance.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    User.Password = null;
+                    //HttpContext.Session.SetString("username", Username);
+                    //HttpContext.Response.Cookies.Append("username", Username);
 
                     var claims = new List<Claim>
                     {
-                        new Claim (ClaimTypes.NameIdentifier, Username),
+                        new Claim (ClaimTypes.NameIdentifier, User.Username),
                         new Claim (ClaimTypes.Role, "Admin")
                     };
 
@@ -55,7 +52,9 @@ namespace HOTWallets.Pages
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToPage("Main");
+                    
+
+                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(User) });
                 }
                 ViewData["errormessage"] = "Kullanıcı adı veya şifre hatalı";
 
@@ -63,6 +62,19 @@ namespace HOTWallets.Pages
             }
 
             return Page();
+        }
+
+        public IActionResult OnPostCreateAcc()
+        {
+            if (ModelState.IsValid)
+            {
+                if (User.Id == 0)
+                    User.Id = Users.Instance.Count + 1;
+
+                Users.Instance.Add(User);
+            }
+            return RedirectToPage("Index");
+
         }
     }
 }

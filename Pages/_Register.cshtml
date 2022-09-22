@@ -1,5 +1,4 @@
-﻿
-
+﻿@model IndexModel
 
 <div class="flex flex-col justify-center items-center mx-auto w-full">
     <div class="flex justify-center mt-16 ml-16">
@@ -22,32 +21,32 @@
             <div class="flex flex-col justify-center items-center w-96">
                 <div class="flex flex-col my-3 w-full">
                     <label class="index-label" for="account_name">Account name</label>
-                    <input class="rounded-full" type="text" name="account[name]" id="account_name">
+                    <input class="rounded-full" asp-for="@Model.User.Username" type="text" name="username" id="account_name">
                 </div>
 
                 <div class="flex flex-col my-3 w-full">
-                    <label class="index-label" for="account_users_attributes_0_first_name">First name</label>
-                    <input class="rounded-full" type="text" name="account[users_attributes][0][first_name]" id="account_users_attributes_0_first_name">
+                    <label class="index-label" for="Firstname">First name</label>
+                    <input class="rounded-full" asp-for="@Model.User.FirstName" type="text" name="Firstname" id="account_users_attributes_0_first_name">
                 </div>
 
                 <div class="flex flex-col my-3 w-full">
-                    <label class="index-label" for="account_users_attributes_0_last_name">Last name</label>
-                    <input class="rounded-full" type="text" name="account[users_attributes][0][last_name]" id="account_users_attributes_0_last_name">
+                    <label class="index-label" for="Lastname">Last name</label>
+                    <input class="rounded-full" asp-for="@Model.User.LastName" type="text" name="Lastname" id="account_users_attributes_0_last_name">
                 </div>
 
                 <div class="flex flex-col my-3 w-full">
-                    <label class="index-label" for="account_users_attributes_0_email">Email</label>
-                    <input class="rounded-full" type="email" name="account[users_attributes][0][email]" id="account_users_attributes_0_email">
+                    <label class="index-label" for="email">Email</label>
+                    <input class="rounded-full" asp-for="@Model.User.Email" type="email" name="email" id="account_users_attributes_0_email">
                 </div>
 
                 <div class="flex flex-col my-3 w-full">
-                    <label class="index-label" for="account_users_attributes_0_password">Password</label>
-                    <input class="rounded-full" type="password" name="account[users_attributes][0][password]" id="account_users_attributes_0_password">
+                    <label class="index-label" for="password">Password</label>
+                    <input class="rounded-full" asp-for="@Model.User.Password" type="password" name="password" id="account_users_attributes_0_password">
                 </div>
 
                 <div class="flex flex-col justify-center items-center">
-                    <input asp-page="/Index" asp-page-handler="SignIn" type="submit" name="commit" value="Create Account" class="my-2 w-full flex justify-center py-2 px-6  text-xl font-medium rounded-full text-white bg-gradient-to-r from-[#CE00D2] to-zinc-700 " data-disable-with="Create Account">
-                    <a asp-page="/Index" class="my-2  w-full flex justify-center py-2 px-6 font-bold  text-xl text-transparent text-8xl bg-clip-text bg-gradient-to-r from-[#CE00D2] to-zinc-700">Sign In</a>
+                    <input asp-page="/Index" asp-page-handler="CreateAcc" type="submit" name="commit" value="Create Account" class="my-2 w-full flex justify-center py-2 px-6  text-xl font-medium rounded-full text-white bg-gradient-to-r from-[#CE00D2] to-zinc-700 " data-disable-with="Create Account">
+                    <a asp-page="/Index" class="my-2  w-full flex justify-center py-2 px-6 font-bold  text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#CE00D2] to-zinc-700">Sign In</a>
                 </div>
             </div>
         </form>

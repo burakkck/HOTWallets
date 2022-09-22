@@ -1,4 +1,5 @@
 using System.Diagnostics.Eventing.Reader;
+using HOTWallets.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,11 +22,12 @@ builder.Services.AddSession(options => {
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
+        options.EventsType = typeof(CustomCookieAuthenticationEvents);
         options.LoginPath = "/Index";
         options.AccessDeniedPath = "/Index";
     });
 
-
+builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 
 var app = builder.Build();
 

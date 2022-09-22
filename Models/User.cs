@@ -1,8 +1,14 @@
-﻿namespace HOTWallets.Models
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace HOTWallets.Models
 {
     public class User
     {
         public int Id
+        {
+            get; set;
+        }
+        public string Username
         {
             get; set;
         }
@@ -14,11 +20,23 @@
         {
             get; set;
         }
-        public string Username
+        public string Email
         {
             get; set;
         }
         public string Password
+        {
+            get; set;
+        }
+        public string Role
+        {
+            get; set;
+        }
+        public List<Wallet> Wallets
+        {
+            get; set;
+        }
+        public List<Transaction> Transactions
         {
             get; set;
         }
@@ -37,7 +55,7 @@
                 if (_Instance == null)
                 {
                     _Instance = new Users();
-                    Instance.Add(new User { FirstName = "Burak", LastName = "Küçük", Id = 1, Username = "burakkucuk", Password = "1234567"});
+                    Instance.Add(new User { FirstName = "Burak", LastName = "Küçük", Id = 1, Email = "burakkucuk@gmail.com", Username = "burakkucuk", Password = "1234567" });
                 }
                 return _Instance;
             }
