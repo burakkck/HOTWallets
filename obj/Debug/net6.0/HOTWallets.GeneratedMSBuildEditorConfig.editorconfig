@@ -8,49 +8,49 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HOTWallets
 build_property.RootNamespace = HOTWallets
-build_property.ProjectDir = C:\Users\Burak\source\repos\HOTWallets\HOTWallets\
+build_property.ProjectDir = c:\Users\Burak\source\repos\HOTWallets\HOTWallets\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Burak\source\repos\HOTWallets\HOTWallets
+build_property.MSBuildProjectDirectory = c:\Users\Burak\source\repos\HOTWallets\HOTWallets
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Error.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Index.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/LoginError.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/LoginError.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5FcnJvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Main.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Main.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Privacy.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_Register.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1JlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ViewImports.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ViewStart.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Shared/_Layout.cshtml]
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-y32kl5z4qd

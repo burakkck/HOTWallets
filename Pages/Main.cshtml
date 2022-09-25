@@ -9,7 +9,7 @@
         <div class="flex flex-1 justify-left items-center">
             <span class="text-2xl">
                 <div id="name_account_73">
-                    <a href="#">@Model.User.Username</a>
+                    <a href="#">@Model.Card.Username</a>
                 </div>
             </span>
             <a href="/account">
@@ -63,12 +63,12 @@
 
                     <span class="inline-block relative z-10" data-action="mouseenter->tooltip#open mouseleave->tooltip#close">
                         <div class="tooltip" data-tooltip-target="content" hidden="">
-                        @String.Format("{0} {1}", @Model.User.FirstName, Model.User.LastName)
+                        @String.Format("{0} {1}", @Model.Card.FirstName, Model.Card.LastName)
                         </div>
                         <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d]
                 h-14 w-14 rounded-full
                 bg-gray-400">
-                            <span class="text-m font-medium leading-none text-white">@String.Format("{0}{1}", @Model.User.FirstName[0], @Model.User.LastName[0])</span>
+                            <span class="text-m font-medium leading-none text-white">@String.Format("{0}{1}", @Model.Card.FirstName[0], @Model.Card.LastName[0])</span>
                         </span>
                     </span>
 

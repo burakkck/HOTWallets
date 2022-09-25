@@ -2,7 +2,7 @@
 
 namespace HOTWallets.Models
 {
-    public class User
+    public class Card
     {
         public int Id
         {
@@ -31,31 +31,27 @@ namespace HOTWallets.Models
         public string Role
         {
             get; set;
-        }
+        } = "Admin";
         public List<Wallet> Wallets
-        {
-            get; set;
-        }
-        public List<Transaction> Transactions
         {
             get; set;
         }
     }
 
-    public class Users : List<User>
+    public class Cards : List<Card>
     {
-        private Users()
+        private Cards()
         {
         }
-        private static Users _Instance = null;
-        public static Users Instance
+        private static Cards _Instance = null;
+        public static Cards Instance
         {
             get
             {
                 if (_Instance == null)
                 {
-                    _Instance = new Users();
-                    Instance.Add(new User { FirstName = "Burak", LastName = "Küçük", Id = 1, Email = "burakkucuk@gmail.com", Username = "burakkucuk", Password = "1234567" });
+                    _Instance = new Cards();
+                    Instance.Add(new Card { FirstName = "Burak", LastName = "Küçük", Id = 1, Email = "burakkucuk@gmail.com", Username = "burakkucuk", Password = "1234567" });
                 }
                 return _Instance;
             }

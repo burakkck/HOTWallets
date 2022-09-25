@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
+using HOTWallets.DataAccess;
 using HOTWallets.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,9 +13,12 @@ namespace HOTWallets.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        
+
         [BindProperty]
-        public User User { get; set; }
+        public Card Card
+        {
+            get; set;
+        }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -33,18 +37,20 @@ namespace HOTWallets.Pages
 
         public IActionResult OnPostSignIn(string username, string password)
         {
+
             if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(username))
             {
-                if (Users.Instance.Any(x => x.Username == username && x.Password == password))
+                var cardDal = new CardDal();
+                if (cardDal.CardCheck(x=> x.Username == username && x.Password == password))
                 {
-                    User = Users.Instance.FirstOrDefault(x => x.Username == username && x.Password == password);
-                    User.Password = null;
+                    Card = cardDal.Get(x => x.Username == username && x.Password == password);
+                    Card.Password = null;
                     //HttpContext.Session.SetString("username", Username);
                     //HttpContext.Response.Cookies.Append("username", Username);
 
                     var claims = new List<Claim>
                     {
-                        new Claim (ClaimTypes.NameIdentifier, User.Username),
+                        new Claim (ClaimTypes.NameIdentifier, Card.Username),
                         new Claim (ClaimTypes.Role, "Admin")
                     };
 
@@ -52,9 +58,7 @@ namespace HOTWallets.Pages
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    
-
-                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(User) });
+                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(Card) });
                 }
                 ViewData["errormessage"] = "Kullanıcı adı veya şifre hatalı";
 
@@ -66,13 +70,9 @@ namespace HOTWallets.Pages
 
         public IActionResult OnPostCreateAcc()
         {
-            if (ModelState.IsValid)
-            {
-                if (User.Id == 0)
-                    User.Id = Users.Instance.Count + 1;
+            var cardDal = new CardDal();
+            cardDal.Add(Card);
 
-                Users.Instance.Add(User);
-            }
             return RedirectToPage("Index");
 
         }

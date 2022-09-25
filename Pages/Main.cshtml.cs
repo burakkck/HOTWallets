@@ -8,12 +8,12 @@ namespace HOTWallets.Pages
 {
     public class MainModel : PageModel
     {
-        public User User{get; set;}
+        public Card Card{get; set;}
 
         public void OnGet(string data)
         {
-            User = JsonSerializer.Deserialize<User>(data);
-            //if (String.IsNullOrWhiteSpace(HttpContext.Session.GetString("username")))
+            Card = JsonSerializer.Deserialize<Card>(data);
+            //if (String.IsNullOrWhiteSpace(HttpContext.Session.GetString("Cardname")))
             //{
             //    return RedirectToPage("Index");
             //}

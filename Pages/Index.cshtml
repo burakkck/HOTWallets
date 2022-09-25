@@ -64,12 +64,12 @@
             <div class="flex flex-col justify-center items-center w-96">
                 <div class="flex flex-col my-3 w-full">
                     <label class="index-label" for="username">Username</label>
-                    <input class="rounded-full" type="text" asp-for=@Model.User.Username name="username" />
+                    <input class="rounded-full" type="text" asp-for=@Model.Card.Username name="username" />
                 </div>
 
                 <div class="flex flex-col my-3 w-full">
                     <label class="index-label" for="user_password">Password</label>
-                    <input asp-for="@Model.User.Password" required="required" class="rounded-full" type="password"
+                    <input asp-for="@Model.Card.Password" required="required" class="rounded-full" type="password"
                         name="password" />
                 </div>
 

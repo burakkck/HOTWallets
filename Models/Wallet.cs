@@ -14,7 +14,7 @@
         {
             get; set;
         }
-        public List<User> Users
+        public List<Card> Cards
         {
             get; set;
         }

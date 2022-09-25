@@ -1,6 +1,6 @@
 ﻿namespace HOTWallets.Models
 {
-    public class Transaction
+    public class Trans
     {
         public int Id
         {
@@ -18,10 +18,19 @@
         {
             get; set;
         }
-        public User User
+        public int CardId
         {
             get; set;
         }
+        public int WalletId
+        {
+            get;set;
+        }
+        public int CategoryId
+        {
+            get; set;
+        }
+
 
     }
 }
