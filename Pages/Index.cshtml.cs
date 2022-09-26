@@ -52,7 +52,7 @@ namespace HOTWallets.Pages
                 {
                     Card = card;
                     //Card = _cardDal.Get(x => x.Username == username && x.Password == password);
-                    var test = _walletDal.GetWalletsByCardId(Card.Id);
+                    var result = _walletDal.GetWalletsByCardId(Card.Id);
                     MainPageDataModel dataModel = new MainPageDataModel
                     {
                         Id = Card.Id,
@@ -61,7 +61,7 @@ namespace HOTWallets.Pages
                         Email = Card.Email,
                         Username = Card.Username
                     };
-                    dataModel.Wallets = test;
+                    dataModel.Wallets = result;
                     //HttpContext.Session.SetString("username", Username);
                     //HttpContext.Response.Cookies.Append("username", Username);
 

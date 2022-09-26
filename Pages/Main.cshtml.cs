@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using HOTTranss.DataAccess;
+using HOTWallets.Hubs;
+using HOTWallets.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HOTWallets.Pages
 {
@@ -35,15 +38,30 @@ namespace HOTWallets.Pages
         {
             get; set;
         }
+        [BindProperty]
+        public Trans Trans
+        {
+            get; set;
+        }
+        [BindProperty]
+        public Category Category
+
+        {
+            get; set;
+        }
 
         ICardDal _cardDal;
         IWalletDal _walletDal;
         ITransDal _transDal;
-        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal)
+        private readonly IHubContext<AppHub> _hub;
+        private readonly IRazorPartialToStringRenderer _renderer;
+        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal, IHubContext<AppHub> hub, IRazorPartialToStringRenderer renderer)
         {
             _cardDal = cardDal;
             _walletDal = walletDal;
             _transDal = transDal;
+            _hub = hub;
+            _renderer = renderer;
         }
 
         public void OnGet(string data)
@@ -56,10 +74,11 @@ namespace HOTWallets.Pages
             //return Page();
         }
 
-        public IActionResult OnGetGetWallet(int id)
+        public IActionResult OnGetGetWallet(int id, int cardId)
         {
             Wallet = _walletDal.GetById(id);
             TransList = _transDal.GetTranssesByWalletId(id);
+            Card = _cardDal.GetById(cardId);
             return Partial("_WalletDetail", this);
         }
 
@@ -69,9 +88,19 @@ namespace HOTWallets.Pages
             return Partial("_EditProfile", Card);
         }
 
-        public IActionResult OnGetExpense()
+        public IActionResult OnGetExpense(int cardId, int walletId)
         {
-            return Partial(""); 
+            Card = _cardDal.GetById(cardId);
+            Wallet = _walletDal.GetById(walletId);
+            return Partial("_ExpenseAdd", this);
+        }
+
+        public IActionResult OnPostSaveExpense()
+        {
+            //Type 1 girdi, type 2 çýktý
+            Category.Icon = Category.Id.ToString();
+            Category.Type = 2;
+            return Partial("");
         }
 
         public IActionResult OnGetSignOut()

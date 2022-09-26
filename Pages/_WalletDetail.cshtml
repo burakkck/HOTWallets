@@ -14,9 +14,9 @@
             <aside class="flex flex-col bg-gray-100 rounded-tl-[50px] rounded-bl-[50px] px-4 py-6">
                 <div class="flex items-center flex-col mt-6 w-96">
                     <div class="flex justify-between text-center px-10 gap-10">
-                        <a asp-page="/Main" asp-page-handler="Expense" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-red-800 basis-1/2" data-turbo-frame="new_transaction">-</a>
+                        <a asp-page="/Main" asp-page-handler="Expense" asp-route-cardId="@Model.Card.Id" asp-route-walletId="@Model.Wallet.Id" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-red-800 basis-1/2" data-turbo-frame="new_transaction">-</a>
 
-                        <a class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-green-800 basis-1/2" data-turbo-frame="new_transaction">+</a>
+                        <a asp-page="/Main" asp-page-handler="Income" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-green-800 basis-1/2" data-turbo-frame="new_transaction">+</a>
                     </div>
                     <div class="overflow-y-scroll h-[calc(100vh-288px)]">
                         <turbo-frame id="index_transaction">
@@ -104,7 +104,9 @@
                 </div>*@
 
                 <div id="chart_loader_wallet_114">
-                    <turbo-frame id="chart_wallet_114" src="https://hotwallets-staging.herokuapp.com/wallets/114/chart">
+                    <turbo-frame id="chart_wallet_114" 
+                    @*src="https://hotwallets-staging.herokuapp.com/wallets/114/chart"*@
+                    >
                         <div class="flex flex-col justify-start items-center mb-10">
                             <h1 class="text-black text-8xl font-bold font-mono mt-8">
                                 @Model.Wallet.Balance

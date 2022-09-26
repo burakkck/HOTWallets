@@ -1,6 +1,8 @@
 using System.Diagnostics.Eventing.Reader;
 using HOTTranss.DataAccess;
 using HOTWallets.DataAccess;
+using HOTWallets.Hubs;
+using HOTWallets.Services;
 using HOTWallets.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -34,6 +36,12 @@ builder.Services.AddScoped<ICardDal, CardDal>();
 builder.Services.AddScoped<IWalletDal, WalletDal>();
 builder.Services.AddScoped<ITransDal, TransDal>();
 
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddTransient<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();
+
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,6 +63,8 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapRazorPages();
+
+app.MapHub<AppHub>("/appHub");
 
 app.Run();
 
