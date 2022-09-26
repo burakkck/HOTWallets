@@ -39,6 +39,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0VkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ProfileInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1Byb2ZpbGVJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1JlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +57,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_WalletDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1dhbGxldERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/Shared/_Layout.cshtml]

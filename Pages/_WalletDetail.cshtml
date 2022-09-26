@@ -1,0 +1,135 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HOTWallets.Pages.MainModel
+
+
+
+<turbo-frame id="main-frame">
+    <main class="container mx-auto mt-5 px-5">
+        @*<turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="IloybGtPaTh2YUc5MGQyRnNiR1YwY3k5QlkyTnZkVzUwTHpjejpaMmxrT2k4dmFHOTBkMkZzYkdWMGN5OVhZV3hzWlhRdk1URTAi--1653965c3af0f77a757b2e7d5c46b4f9f1eacba05d065760557c097ebcf88901"></turbo-cable-stream-source> *@
+        <section class="flex justify-between max-w-screen-2xl max-h-max mt-12 w-full px-16">
+            <aside class="flex flex-col bg-gray-100 rounded-tl-[50px] rounded-bl-[50px] px-4 py-6">
+                <div class="flex items-center flex-col mt-6 w-96">
+                    <div class="flex justify-between text-center px-10 gap-10">
+                        <a asp-page="/Main" asp-page-handler="Expense" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-red-800 basis-1/2" data-turbo-frame="new_transaction">-</a>
+
+                        <a class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-green-800 basis-1/2" data-turbo-frame="new_transaction">+</a>
+                    </div>
+                    <div class="overflow-y-scroll h-[calc(100vh-288px)]">
+                        <turbo-frame id="index_transaction">
+                            <turbo-frame id="new_transaction"></turbo-frame>
+
+                            <div id="wallet_transactions">
+                                @foreach (var tran in @Model.TransList)
+                                {
+                                    <turbo-frame id="transaction_@tran.Id">
+                                        <div class="flex flex-row justify-between items-start mt-5">
+                                            <div>
+                                                <a class="rounded-full py-2 px-4 bg-gray-100 inline-block font-medium" data-turbo-method="delete" href="/wallets/114/transactions/133">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="text-4xl font-bold mt-4">
+                                                @tran.Price
+                                            </div>
+
+                                            <div>
+                                                <a class="rounded-full py-2 px-4 bg-gray-100 inline-block font-medium" href="/wallets/114/transactions/133/edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-row justify-between items-end">
+                                            <div class="capitalize">
+                                                shopping
+                                            </div>
+
+                                            <div class="capitalize">
+                                                Market
+                                            </div>
+
+                                            <div>
+                                                bk
+                                            </div>
+                                        </div>
+
+                                        <hr class="w-full border-2 rounded-full">
+                                    </turbo-frame>
+                                }
+                            </div>
+                        </turbo-frame>
+                    </div>
+
+                </div>
+            </aside>
+            <section class="w-screen rounded-tr-[50px] rounded-br-[50px] bg-gray-300/50 flex flex-col justify-start px-6 py-2">
+                @*<div class="flex items-center justify-start">
+                <p class="text-xl">
+                Users:
+                </p>
+
+                <div class="flex mt-2 gap-4 pb-2 ml-4">
+
+                <div class="flex items-center space-x-1 mx-auto">
+                <div class="flex flex-shrink-0 -space-x-2">
+
+                <span class="inline-block relative z-10" data-action="mouseenter->tooltip#open mouseleave->tooltip#close">
+                <div class="tooltip" data-tooltip-target="content" hidden="">
+                burak küçük
+                </div>
+                <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d]
+                h-14 w-14 rounded-full
+                bg-gray-400">
+                <span class="text-xs font-medium leading-none text-white">bk</span>
+                </span>
+                </span>
+
+                <div class="w-8 h-8 text-xs" hidden=""></div>
+                <div class="w-11 h-11 text-m" hidden=""></div>
+                <div class="w-16 h-16" hidden=""></div>
+
+                </div>
+
+                </div>
+
+                </div>
+                </div>*@
+
+                <div id="chart_loader_wallet_114">
+                    <turbo-frame id="chart_wallet_114" src="https://hotwallets-staging.herokuapp.com/wallets/114/chart">
+                        <div class="flex flex-col justify-start items-center mb-10">
+                            <h1 class="text-black text-8xl font-bold font-mono mt-8">
+                                @Model.Wallet.Balance
+                            </h1>
+                        </div>
+
+                        <div id="chart-1" style="height: 400px; width: 100%; text-align: center; color: #999; line-height: 400px; font-size: 14px; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;"><canvas style="display: block; box-sizing: border-box; height: 400px; width: 904px;" width="904" height="400"></canvas></div>
+                        <script>
+                            (function () {
+                                if (document.documentElement.hasAttribute("data-turbolinks-preview")) return;
+                                if (document.documentElement.hasAttribute("data-turbo-preview")) return;
+
+                                var createChart = function () { new Chartkick["PieChart"]("chart-1", [["shopping", 1], ["bank", 1]], { "colors": ["#fca5a5", "#f87171", "#ef4444", "#fdba74", "#fb923c", "#f97316", "#86efac", "#4ade80", "#22c55e", "#5eead4", "#2dd4bf", "#14b8a6", "#67e8f9", "#22d3ee", "#06b6d4", "#93c5fd", "#60a5fa", "#3b82f6", "#c4b5fd", "#a78bfa", "#8b5cf6"] }); };
+                                if ("Chartkick" in window) {
+                                    createChart();
+                                } else {
+                                    window.addEventListener("chartkick:load", createChart, true);
+                                }
+                            })();
+                        </script>
+                    </turbo-frame>
+                </div>
+
+            </section>
+        </section>
+
+    </main>
+</turbo-frame>

@@ -32,10 +32,10 @@ namespace HOTWallets.Models
         {
             get; set;
         } = "Admin";
-        public List<Wallet> Wallets
+        public ICollection<CardWallet> CardWallets
         {
             get; set;
-        }
+        } = new List<CardWallet>();
     }
 
     public class Cards : List<Card>

@@ -19,10 +19,18 @@ namespace HOTWallets.Pages
         {
             get; set;
         }
+        public List<Wallet> Wallets
+        {
+            get; set;
+        }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        private ICardDal _cardDal;
+        private IWalletDal _walletDal;
+        public IndexModel(ILogger<IndexModel> logger, ICardDal cardDal, IWalletDal walletDal)
         {
             _logger = logger;
+            _cardDal = cardDal;
+            _walletDal = walletDal;
         }
 
         public void OnGet()
@@ -40,11 +48,20 @@ namespace HOTWallets.Pages
 
             if (!String.IsNullOrWhiteSpace(username) || !String.IsNullOrWhiteSpace(username))
             {
-                var cardDal = new CardDal();
-                if (cardDal.CardCheck(x=> x.Username == username && x.Password == password))
+                if (_cardDal.CardCheck(x=> x.Username == username && x.Password == password, out var card))
                 {
-                    Card = cardDal.Get(x => x.Username == username && x.Password == password);
-                    Card.Password = null;
+                    Card = card;
+                    //Card = _cardDal.Get(x => x.Username == username && x.Password == password);
+                    var test = _walletDal.GetWalletsByCardId(Card.Id);
+                    MainPageDataModel dataModel = new MainPageDataModel
+                    {
+                        Id = Card.Id,
+                        FirstName = Card.FirstName,
+                        LastName = Card.LastName,
+                        Email = Card.Email,
+                        Username = Card.Username
+                    };
+                    dataModel.Wallets = test;
                     //HttpContext.Session.SetString("username", Username);
                     //HttpContext.Response.Cookies.Append("username", Username);
 
@@ -58,7 +75,7 @@ namespace HOTWallets.Pages
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(Card) });
+                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(dataModel) });
                 }
                 ViewData["errormessage"] = "Kullanıcı adı veya şifre hatalı";
 
@@ -70,9 +87,13 @@ namespace HOTWallets.Pages
 
         public IActionResult OnPostCreateAcc()
         {
-            var cardDal = new CardDal();
-            cardDal.Add(Card);
+            Wallet wallet = new Wallet { Name = "My Wallet", Balance = 0,  };
 
+            Card.CardWallets.Add(new CardWallet { Wallet = wallet });
+            _cardDal.Add(Card);
+            //_walletDal.Add(new Wallet {Balance = 0, Name = "My Wallet" });
+            //var lastWallet =  _walletDal.GetAll().OrderByDescending(x => x.Id).First();
+            var lastWallet = _walletDal.LastData();
             return RedirectToPage("Index");
 
         }

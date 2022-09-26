@@ -31,10 +31,11 @@ namespace HOTWallets.DataAccess
             }
         }
 
-        public bool CardCheck(Expression<Func<Card, bool>> filter)
+        public bool CardCheck(Expression<Func<Card, bool>> filter, out Card value)
         {
             using (var context = new HotWalletsContext())
             {
+                value = Get(filter);
                 return context.Card.Any(filter);
             }
         }
@@ -51,7 +52,7 @@ namespace HOTWallets.DataAccess
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Wallets.Where(x => x.Id == walletId).FirstOrDefault().Cards;
+                return context.Wallet.Where(x => x.Id == walletId).FirstOrDefault().CardWallets.Where(w => w.WalletId == walletId).Select(x => x.Card).ToList();
             }
         }
 

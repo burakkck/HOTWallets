@@ -1,22 +1,23 @@
 ﻿namespace HOTWallets.Models
 {
-    public class Wallet
+    public class CardWallet
     {
-        public int Id
+        public int CardId
         {
             get; set;
         }
-        public string Name
+        public int WalletId
         {
             get; set;
         }
-        public decimal Balance
+        public Card Card
         {
             get; set;
         }
-        public ICollection<CardWallet> CardWallets
+        public Wallet Wallet
         {
             get; set;
-        } = new List<CardWallet>();
+        }
+
     }
 }

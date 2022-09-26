@@ -9,20 +9,37 @@ namespace HOTWallets.DataAccess
         {
             optionsBuilder.UseSqlServer(connectionString:@"Server=(local); Database=HotWallets;Trusted_Connection=true");            
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CardWallet>()
+                .HasKey(cw => new { cw.CardId, cw.WalletId });
+            modelBuilder.Entity<CardWallet>()
+                .HasOne(cw => cw.Card)
+                .WithMany(c => c.CardWallets)
+                .HasForeignKey(cw => cw.CardId);
+            modelBuilder.Entity<CardWallet>()
+                .HasOne(cw => cw.Wallet)
+                .WithMany(w => w.CardWallets)
+                .HasForeignKey(cw => cw.WalletId);
+        }
 
         public DbSet<Card> Card
         {
             get; set;
         }
-        public DbSet<Wallet> Wallets
+        public DbSet<Wallet> Wallet
         {
             get; set;
         }
-        public DbSet<Trans> Transactions
+        public DbSet<Trans> Trans
         {
             get; set;
         }
-        public DbSet<Category> Categories
+        public DbSet<Category> Category
+        {
+            get; set;
+        }
+        public DbSet<CardWallet> CardsWallets
         {
             get; set;
         }

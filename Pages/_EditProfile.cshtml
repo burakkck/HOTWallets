@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Models.Card
+
+<small class="block px-4 pb-2 text-sm font-bold text-gray-800 border-b">
+    <turbo-frame id="user_@Model.Id" reloadable="">
+        <div class="flex flex-col justify-center items-center">
+            <form class="flex justify-center flex-col mt-6 w-full" action="/my/profile" accept-charset="UTF-8" method="post">
+                <input type="hidden" name="_method" value="patch" autocomplete="off"><input type="hidden" name="authenticity_token" value="bmdT01ORAWmFZqZ-W9FaM2RhaV0l8Dvqav-riwBNiQzq2pwHfMNkDRh5xIxFECsUTf8_z7dEvtgPDzFMYQUMiw" autocomplete="off">
+
+                <div class="flex flex-col items-center w-full gap-4">
+                    <div class="flex flex-col items-center w-full">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_first_name">First name</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.FirstName" name="user[first_name]" id="user_first_name">
+                    </div>
+
+                    <div class="flex flex-col items-center w-full">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_last_name">Last name</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.LastName" name="user[last_name]" id="user_last_name">
+                    </div>
+
+                    <div class="flex flex-col items-center w-full">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_email">Email</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="email" value="@Model.Email" name="user[email]" id="user_email">
+                    </div>
+
+                    <div class="flex flex-col items-center w-full">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_password">Password</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="password" name="user[password]" id="user_password">
+                    </div>
+
+                    <input type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
+
+                </div>
+
+            </form>
+            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-page-handler="CancelEditProfile">Cancel</a>
+        </div>
+    </turbo-frame>
+</small>

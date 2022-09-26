@@ -1,4 +1,6 @@
 using System.Diagnostics.Eventing.Reader;
+using HOTTranss.DataAccess;
+using HOTWallets.DataAccess;
 using HOTWallets.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -28,6 +30,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
+builder.Services.AddScoped<ICardDal, CardDal>();
+builder.Services.AddScoped<IWalletDal, WalletDal>();
+builder.Services.AddScoped<ITransDal, TransDal>();
 
 var app = builder.Build();
 

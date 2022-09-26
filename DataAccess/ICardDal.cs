@@ -7,7 +7,7 @@ namespace HOTWallets.DataAccess
     {
         Card Get(Expression<Func<Card, bool>> filter);
         Card GetById(int id);
-        bool CardCheck(Expression<Func<Card, bool>> filter);
+        bool CardCheck(Expression<Func<Card, bool>> filter, out Card value);
         List<Card> GetCardsByWalletId(int walletId);
         void Add(Card card);
         void Update(Card card);

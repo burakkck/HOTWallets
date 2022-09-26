@@ -6,10 +6,13 @@ namespace HOTWallets.DataAccess
     public interface IWalletDal
     {
         Wallet Get(Expression<Func<Wallet, bool>> filter);
+        Wallet GetById(int id);
+        List<Wallet> GetAll(Expression<Func<Wallet, bool>> filter = null);
+        Wallet LastData();
         Wallet WalletById(int id);
-        IList<Wallet> GetWalletsByCardId(Expression<Func<Wallet, bool>> filter = null);
-        void Add(Wallet Wallet);
-        void Update(Wallet Wallet);
-        void Delete(Wallet Wallet);
+        List<Wallet> GetWalletsByCardId(int cardId);
+        void Add(Wallet wallet);
+        void Update(Wallet wallet);
+        void Delete(Wallet wallet);
     }
 }

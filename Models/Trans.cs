@@ -10,7 +10,7 @@
         {
             get; set;
         }
-        public float Price
+        public decimal Price
         {
             get; set;
         }
