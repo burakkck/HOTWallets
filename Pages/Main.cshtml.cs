@@ -13,7 +13,10 @@ namespace HOTWallets.Pages
     public class MainModel : PageModel
     {
         [BindProperty]
-        public Card Card{get; set;}
+        public Card Card
+        {
+            get; set;
+        }
 
         [BindProperty]
         public Wallet Wallet
@@ -56,7 +59,6 @@ namespace HOTWallets.Pages
         public IActionResult OnGetGetWallet(int id)
         {
             Wallet = _walletDal.GetById(id);
-            //List<Trans> trans = new List<Trans>();
             TransList = _transDal.GetTranssesByWalletId(id);
             return Partial("_WalletDetail", this);
         }
@@ -88,9 +90,15 @@ namespace HOTWallets.Pages
             return RedirectToPage("/Index");
         }
 
-        public IActionResult OnGetCancelEditProfile()
+        public IActionResult OnGetCancelEditProfile(string card)
+        {   
+            return Partial("_ProfileInfo", JsonSerializer.Deserialize<MainPageDataModel>(card));
+        }
+
+        public IActionResult OnPostEditAcc()
         {
-            return Partial("_ProfileInfo");
+            _cardDal.Update(Card);
+            return Partial("_ProfileInfo", MainPageDataModel);
         }
     }
 }

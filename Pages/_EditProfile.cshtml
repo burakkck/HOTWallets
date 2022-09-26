@@ -8,36 +8,43 @@
 <small class="block px-4 pb-2 text-sm font-bold text-gray-800 border-b">
     <turbo-frame id="user_@Model.Id" reloadable="">
         <div class="flex flex-col justify-center items-center">
-            <form class="flex justify-center flex-col mt-6 w-full" action="/my/profile" accept-charset="UTF-8" method="post">
+            <form class="flex justify-center flex-col mt-6 w-full" accept-charset="UTF-8" method="post">
                 <input type="hidden" name="_method" value="patch" autocomplete="off"><input type="hidden" name="authenticity_token" value="bmdT01ORAWmFZqZ-W9FaM2RhaV0l8Dvqav-riwBNiQzq2pwHfMNkDRh5xIxFECsUTf8_z7dEvtgPDzFMYQUMiw" autocomplete="off">
 
+
                 <div class="flex flex-col items-center w-full gap-4">
+                    <input type="hidden" name="id" asp-for="@Model.Id" value="@Model.Id" />
                     <div class="flex flex-col items-center w-full">
                         <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_first_name">First name</label>
-                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.FirstName" name="user[first_name]" id="user_first_name">
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.FirstName" name="FirstName" id="user_first_name" asp-for="FirstName">
                     </div>
 
                     <div class="flex flex-col items-center w-full">
                         <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_last_name">Last name</label>
-                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.LastName" name="user[last_name]" id="user_last_name">
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.LastName" name="LastName" id="user_last_name" asp-for="LastName">
+                    </div>
+
+                    <div class="flex flex-col items-center w-full">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_last_name">UserName</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.Username" name="Username" id="user_last_name" asp-for="Username">
                     </div>
 
                     <div class="flex flex-col items-center w-full">
                         <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_email">Email</label>
-                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="email" value="@Model.Email" name="user[email]" id="user_email">
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="email" value="@Model.Email" name="email" id="user_email" asp-for=Email>
                     </div>
 
                     <div class="flex flex-col items-center w-full">
                         <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_password">Password</label>
-                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="password" name="user[password]" id="user_password">
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="password" value="@Model.Password" name="password" id="user_password" asp-for="Password">
                     </div>
 
-                    <input type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
+                    <input asp-page="/Main" asp-page-handler="EditAcc" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
 
                 </div>
 
             </form>
-            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-page-handler="CancelEditProfile">Cancel</a>
+            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-route-card = "@System.Text.Json.JsonSerializer.Serialize(Model)" asp-page-handler="CancelEditProfile">Cancel</a>
         </div>
     </turbo-frame>
 </small>
