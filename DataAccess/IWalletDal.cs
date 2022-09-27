@@ -11,7 +11,7 @@ namespace HOTWallets.DataAccess
         Wallet LastData();
         Wallet WalletById(int id);
         List<Wallet> GetWalletsByCardId(int cardId);
-        void Add(Wallet wallet);
+        Wallet Add(Wallet wallet);
         void Update(Wallet wallet);
         void Delete(Wallet wallet);
     }

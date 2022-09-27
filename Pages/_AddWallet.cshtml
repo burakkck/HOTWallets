@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model HOTWallets.Pages.MainModel
+
+<turbo-frame name="newwallet-frame">
+    <form method="post">
+        <div class="flex flex-col w-96 justify-center items-center">
+            <input class="form--input mb-4" placeholder="Name" asp-for=@Model.Wallet.Name type="text">
+            <div class="flex flex-col border-2 border-gray-200 p-2 rounded-md mb-4">
+                <label for="wallet_users">Users</label>
+                <div class="flex flex-row items-center gap-2">
+                    @foreach (var card in Model.Cards)
+                    {
+                        <input type="checkbox" name="userIds" value=@card.Id />
+                        @card.Username
+                    }
+                </div>
+            </div>
+            <div class="flex flex-row gap-2">
+                <input asp-page="/Main" asp-page-handler="CreateWallet" asp-route-userid=@Model.MainPageDataModel.Id type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">
+            </div>
+        </div>
+    </form>
+</turbo-frame>

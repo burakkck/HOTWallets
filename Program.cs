@@ -35,6 +35,7 @@ builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 builder.Services.AddScoped<ICardDal, CardDal>();
 builder.Services.AddScoped<IWalletDal, WalletDal>();
 builder.Services.AddScoped<ITransDal, TransDal>();
+builder.Services.AddScoped<ICardWalletDal, CardWalletDal>();
 
 builder.Services.AddHttpContextAccessor();
 

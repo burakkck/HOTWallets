@@ -7,13 +7,14 @@ namespace HOTWallets.DataAccess
 {
     public class WalletDal : IWalletDal
     {
-        public void Add(Wallet wallet)
+        public Wallet Add(Wallet wallet)
         {
             using (var context = new HotWalletsContext())
             {
                 context.Wallet.Add(wallet);
                 context.SaveChanges();
             }
+            return wallet;
         }
 
         public void Delete(Wallet wallet)

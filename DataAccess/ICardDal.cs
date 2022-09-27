@@ -6,6 +6,7 @@ namespace HOTWallets.DataAccess
     public interface ICardDal
     {
         Card Get(Expression<Func<Card, bool>> filter);
+        List<Card> GetAll();
         Card GetById(int id);
         bool CardCheck(Expression<Func<Card, bool>> filter, out Card value);
         List<Card> GetCardsByWalletId(int walletId);

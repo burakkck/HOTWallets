@@ -31,6 +31,14 @@ namespace HOTWallets.DataAccess
             }
         }
 
+        public List<Card> GetAll()
+        {
+            using (var context = new HotWalletsContext())
+            {
+                return context.Card.ToList();
+            }
+        }
+
         public bool CardCheck(Expression<Func<Card, bool>> filter, out Card value)
         {
             using (var context = new HotWalletsContext())

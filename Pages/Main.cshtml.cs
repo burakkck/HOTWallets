@@ -49,17 +49,22 @@ namespace HOTWallets.Pages
         {
             get; set;
         }
+        
+        public List<Card> Cards = new List<Card>();
 
         ICardDal _cardDal;
         IWalletDal _walletDal;
         ITransDal _transDal;
+        ICardWalletDal _cardWalletDal;
         private readonly IHubContext<AppHub> _hub;
         private readonly IRazorPartialToStringRenderer _renderer;
-        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal, IHubContext<AppHub> hub, IRazorPartialToStringRenderer renderer)
+        
+        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal, ICardWalletDal cardWalletDal, IHubContext<AppHub> hub, IRazorPartialToStringRenderer renderer)
         {
             _cardDal = cardDal;
             _walletDal = walletDal;
             _transDal = transDal;
+            _cardWalletDal = cardWalletDal;
             _hub = hub;
             _renderer = renderer;
         }
@@ -72,6 +77,7 @@ namespace HOTWallets.Pages
             //    return RedirectToPage("Index");
             //}
             //return Page();
+            Cards = _cardDal.GetAll();
         }
 
         public IActionResult OnGetGetWallet(int id, int cardId)
@@ -103,6 +109,26 @@ namespace HOTWallets.Pages
             return Partial("");
         }
 
+        public IActionResult OnPostCreateWallet()
+        {
+            string users = Request.Form["userIds"];
+            var userids = users.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            Wallet = _walletDal.Add(Wallet);
+
+            foreach (var userid in userids)
+            {
+                CardWallet cardWallet = new CardWallet
+                {
+                    CardId = userid,
+                    WalletId = Wallet.Id
+                };
+                _cardWalletDal.Add(cardWallet);
+            }
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("_WalletsView", Wallet);
+
+        }
+
         public IActionResult OnGetSignOut()
         {
             if (HttpContext.Request.Cookies.Count > 0)
@@ -114,7 +140,7 @@ namespace HOTWallets.Pages
                 }
             }
 
-             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Clear();
             return RedirectToPage("/Index");
         }
