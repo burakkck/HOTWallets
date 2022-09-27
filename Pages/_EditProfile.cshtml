@@ -25,8 +25,8 @@
                     </div>
 
                     <div class="flex flex-col items-center w-full">
-                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_last_name">UserName</label>
-                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.Username" name="Username" id="user_last_name" asp-for="Username">
+                        <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_username">UserName</label>
+                        <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" value="@Model.Username" name="Username" id="user_username" asp-for="Username">
                     </div>
 
                     <div class="flex flex-col items-center w-full">
@@ -39,12 +39,12 @@
                         <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="password" value="@Model.Password" name="password" id="user_password" asp-for="Password">
                     </div>
 
-                    <input asp-page="/Main" asp-page-handler="EditAcc" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
+                    <input asp-page="/Main" asp-page-handler="EditAcc" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">
 
                 </div>
 
             </form>
-            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-route-card = "@System.Text.Json.JsonSerializer.Serialize(Model)" asp-page-handler="CancelEditProfile">Cancel</a>
+            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-route-card="@System.Text.Json.JsonSerializer.Serialize(Model)" asp-page-handler="CancelEditProfile">Cancel</a>
         </div>
     </turbo-frame>
 </small>

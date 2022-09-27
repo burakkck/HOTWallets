@@ -3,8 +3,8 @@
 @{
 }
 
-<turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="IloybGtPaTh2YUc5MGQyRnNiR1YwY3k5QlkyTnZkVzUwTHpjeiI=--1b1a4166c7b0ba60d422a47f4b07ebf9cd15dea0352275f1d4e2ba8192e2b0a5"></turbo-cable-stream-source>
-
+@*<turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="IloybGtPaTh2YUc5MGQyRnNiR1YwY3k5QlkyTnZkVzUwTHpjeiI=--1b1a4166c7b0ba60d422a47f4b07ebf9cd15dea0352275f1d4e2ba8192e2b0a5"></turbo-cable-stream-source>
+*@
 
 <nav class="flex flex-row justify-between px-16 mt-2 border-b-2 border-gray-100 p-2 w-screen">
     <div class="flex flex-1 justify-left items-center">
@@ -66,9 +66,7 @@
                     <div class="tooltip" data-tooltip-target="content" hidden="">
                         @String.Format("{0} {1}", @Model.MainPageDataModel.FirstName, Model.MainPageDataModel.LastName)
                     </div>
-                    <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d]
-                h-14 w-14 rounded-full
-                bg-gray-400">
+                    <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d] h-14 w-14 rounded-full bg-gray-400">
                         <span class="text-m font-medium leading-none text-white">@String.Format("{0}{1}", @Model.MainPageDataModel.FirstName[0], @Model.MainPageDataModel.LastName[0])</span>
                     </span>
                 </span>
@@ -92,28 +90,54 @@
 
 <turbo-frame id="main-frame">
     <main class="container mx-auto mt-5 px-5">
-        <turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="IloybGtPaTh2YUc5MGQyRnNiR1YwY3k5QlkyTnZkVzUwTHpjejp3YWxsZXRzIg==--f5ae702253a3fb285495ad91e4d69c67130904b76c9f603f21d7742f2f8ddd68"></turbo-cable-stream-source>
-
-        <section class="flex justify-center items-center flex-col mt-16">
-            <p class="text-black font-bold text-5xl">Welcome</p>
-            <p class="text-black font-bold text-3xl mt-3 mb-10">@Model.MainPageDataModel.FirstName @Model.MainPageDataModel.LastName</p>
-            <hr class="w-full">
-        </section>
+        
+        <turbo-frame id="welcome-info">
+            <section class="flex justify-center items-center flex-col mt-16">
+                <p class="text-black font-bold text-5xl">Welcome</p>
+                <p class="text-black font-bold text-3xl mt-3 mb-10">@Model.MainPageDataModel.FirstName @Model.MainPageDataModel.LastName</p>
+                <hr class="w-full">
+            </section>
+        </turbo-frame>
 
         <section class="flex justify-center flex-col items-center w-full pt-10">
             <div class="ml-2 w-96">
+                
                 <div class="relative" data-controller="dropdown transition" aria-haspopup="true" aria-expanded="false">
                     <div data-action="click->dropdown#toggle" role="button" data-dropdown-target="button" data-transition-target="trigger">
                         <button class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
-                        </button><button class="my-2 w-full flex justify-center py-2 px-6  text-xl font-medium rounded-full text-white bg-gradient-to-r from-[#CE00D2] to-zinc-700">Add Wallet</button>
-
-
+                        </button>
+                        <button class="my-2 w-full flex justify-center py-2 px-6  text-xl font-medium rounded-full text-white bg-gradient-to-r from-[#CE00D2] to-zinc-700">Add Wallet</button>
                     </div>
+
                     <div data-dropdown-target="menu" data-helpers--popover-target="menu" data-transition-target="toggle" data-transition-enter="transition ease-out duration-100" data-transition-enter-start="transform opacity-0 scale-95" data-transition-enter-end="transform opacity-100 scale-100" data-transition-leave="transition ease-in duration-75" data-transition-leave-start="transform opacity-100 scale-100" data-transition-leave-end="transform opacity-0 scale-95" class="hidden z-50 mt-2 min-w-max rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 absolute origin-top-right right-0" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                         <div class="py-1 divide-y">
+                            test
+                            <turbo-frame loading="eager" id="new_wallet" src="/wallets/new">
+                                <div class="flex justify-center items-center">
+                                    <form class="contents" action="/wallets" accept-charset="UTF-8" method="post">
+                                        <input type="hidden" name="authenticity_token" value="EsxcdjhYdQ-KdL4mEdxoJXuKMHmYHlcs4Dg3RH6QLgLQ75HYxnd8af5ZPl9RfKrCWZASYXlG99MJf8txcGoDuw" autocomplete="off">
 
-                            <turbo-frame loading="lazy" id="new_wallet" src="/wallets/new"></turbo-frame>
+
+                                        <div class="flex flex-col w-96 justify-center items-center">
+                                            <input class="form--input mb-4" placeholder="Name" type="text" name="wallet[name]" id="wallet_name">
+
+                                            <div class="flex flex-col border-2 border-gray-200 p-2 rounded-md mb-4">
+                                                <label for="wallet_users">Users</label>
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <input type="checkbox" name="wallet[user_ids][]" id="wallet_user_ids_" value="79" checked="checked">
+                                                    burak küçük
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-row gap-2">
+                                                <a data-turbo-frame="_top" class="form--cancel" href="/wallets">Cancel</a>
+                                                <input type="submit" name="commit" value="Create Wallet" class="form--submit" data-disable-with="Create Wallet">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </turbo-frame>
 
                         </div>
                     </div>

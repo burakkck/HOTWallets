@@ -127,7 +127,9 @@ namespace HOTWallets.Pages
         public IActionResult OnPostEditAcc()
         {
             _cardDal.Update(Card);
-            return Partial("_ProfileInfo", MainPageDataModel);
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("_ChangeUserInfo", MainPageDataModel);
+            //return Partial("_ProfileInfo", MainPageDataModel);
         }
     }
 }
