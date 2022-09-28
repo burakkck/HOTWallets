@@ -6,7 +6,7 @@
 @*<turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="IloybGtPaTh2YUc5MGQyRnNiR1YwY3k5QlkyTnZkVzUwTHpjeiI=--1b1a4166c7b0ba60d422a47f4b07ebf9cd15dea0352275f1d4e2ba8192e2b0a5"></turbo-cable-stream-source>
 *@
 
-<nav class="flex flex-row justify-between px-16 mt-2 border-b-2 border-gray-100 p-2 w-screen">
+<nav class="flex flex-row justify-between px-16 mt-2 border-b-2 border-gray-100 p-2 w-full">
     <div class="flex flex-1 justify-left items-center">
         <span class="text-2xl">
             <div id="name_account_73">
@@ -101,22 +101,10 @@
 
         <section class="flex justify-center flex-col items-center w-full pt-10">
             <div class="ml-2 w-96">
-
                 <div class="flex justify-center items-center">
-                    <details aria-label="Dropdown" class="relative flex justify-center items-center">
-                        <summary role="button">
-                            <span class="inline-block relative z-10" data-action="mouseenter->tooltip#open mouseleave->tooltip#close">
-                                <div class="my-2  w-full flex justify-center py-2 px-6  text-2xl font-medium rounded-full text-white bg-gradient-to-r from-[#CE00D2] to-zinc-700" data-tooltip-target="content" hidden="">
-                                    Add Wallet
-                                </div>
-                            </span>
-                        </summary>
-                        <article aria-label="Dropdown body" class="absolute z-50 left-0 mt-1 min-w-max rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                            <small class="block px-4 pb-2 text-sm font-bold text-gray-800 border-b">
-                                <partial name="_AddWallet" model=@Model></partial>
-                            </small>
-                        </article>
-                    </details>
+                    <turbo-frame id="newwallet_frame">
+                        <partial name="_AddWallet" model=@Model></partial>
+                    </turbo-frame>
                 </div>
 
                 @*
@@ -164,17 +152,16 @@
 
             </div>
             <div class="mt-10">
-                <turbo-frame id="wallets">
-                <div id="userwallets" class="grid grid-cols-3 gap-10">
-                    
-                    @foreach (var wallet in Model.MainPageDataModel.Wallets)
-                    {
-                        <partial name="_ShowWallet" model="@wallet"></partial>
-                    }
-
-                </div>
+                <turbo-frame id="wallets" class="grid grid-cols-3 gap-10">
+                    @*<div id="userwallets" >*@
+                        @foreach (var wallet in Model.MainPageDataModel.Wallets)
+                        {
+                            <partial name="_ShowWallet" model="@wallet" />
+                        }
+                    @*</div>*@
                 </turbo-frame>
             </div>
+
         </section>
 
     </main>

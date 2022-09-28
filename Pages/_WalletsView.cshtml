@@ -4,16 +4,16 @@
 @{
 }
 
-@model Models.Wallet
+@model HOTWallets.Pages.MainModel
 
 <turbo-stream action="replace" target="newwallet-frame">
     <template>
-        <turbo-frame id="newwallet-frame"></turbo-frame>
+        <partial name="_AddWallet.cshtml" model="@Model"/>
     </template>
 </turbo-stream>
 
-<turbo-stream action="prepend" target="wallets">
+<turbo-stream action="append" target="wallets">
     <template>
-        <partial name="_ShowWallet.cshtml" model="@Model" />
+        <partial name="_ShowWallet.cshtml" model="@Model.Wallet" />
     </template>
 </turbo-stream>

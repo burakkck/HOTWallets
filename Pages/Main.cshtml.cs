@@ -10,6 +10,7 @@ using HOTTranss.DataAccess;
 using HOTWallets.Hubs;
 using HOTWallets.Services;
 using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
 
 namespace HOTWallets.Pages
 {
@@ -80,11 +81,11 @@ namespace HOTWallets.Pages
             Cards = _cardDal.GetAll();
         }
 
-        public IActionResult OnGetGetWallet(int id, int cardId)
+        public IActionResult OnGetGetWallet(int id)
         {
             Wallet = _walletDal.GetById(id);
             TransList = _transDal.GetTranssesByWalletId(id);
-            Card = _cardDal.GetById(cardId);
+            Card = _cardDal.GetById(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             return Partial("_WalletDetail", this);
         }
 
@@ -125,8 +126,7 @@ namespace HOTWallets.Pages
                 _cardWalletDal.Add(cardWallet);
             }
             Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("_WalletsView", Wallet);
-
+            return Partial("_WalletsView", this);
         }
 
         public IActionResult OnGetSignOut()

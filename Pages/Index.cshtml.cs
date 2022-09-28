@@ -62,12 +62,15 @@ namespace HOTWallets.Pages
                         Username = Card.Username
                     };
                     dataModel.Wallets = result;
-                    //HttpContext.Session.SetString("username", Username);
+                    //HttpContext.Session.Set<MainPageDataModel>("userinfo", dataModel);
+                    //MainPageDataModel model = HttpContext.Session.Get<MainPageDataModel>("userinfo");
+
                     //HttpContext.Response.Cookies.Append("username", Username);
 
                     var claims = new List<Claim>
                     {
-                        new Claim (ClaimTypes.NameIdentifier, Card.Username),
+                        new Claim (ClaimTypes.NameIdentifier, Card.Id.ToString()),
+                        new Claim (ClaimTypes.Name, Card.Username),
                         new Claim (ClaimTypes.Role, "Admin")
                     };
 

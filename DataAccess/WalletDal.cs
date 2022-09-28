@@ -58,13 +58,15 @@ namespace HOTWallets.DataAccess
                 //return context.CardsWallets.Where(x => x.CardId == cardId).Select(y => y.Wallet).ToList();
                 //return context.Wallet.Include(c => c.CardWallets.Where(x => x.CardId == cardId)).ToList();
 
-                var query = from wallet in context.Wallet
-                       join cw in context.CardsWallets on wallet.Id equals cw.WalletId
-                       join card in context.Card on cw.CardId equals card.Id
-                       where card.Id == cardId
-                       select wallet;
+                //Cwallets = context.CardsWallets.Where(i => i.CardId == cardId).ToList(); //.Select(x => x.WalletId).ToList().ForEach(x => wallets.Add(context.Wallet.Where(y => y.Id == Convert.ToInt32(x))));
 
-                return query.ToList();
+
+                var query = from wallet in context.Wallet
+                            join cw in context.CardsWallets on wallet.Id equals cw.WalletId
+                            where cw.CardId == cardId
+                            select wallet;
+
+                return query.OrderBy(i => i.Id).ToList();
             }
         }
 
