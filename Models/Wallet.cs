@@ -17,6 +17,15 @@
         public ICollection<CardWallet> CardWallets
         {
             get; set;
-        } = new List<CardWallet>();
+        } 
+        //public virtual ICollection<Card> Cards
+        //{
+        //    get; set;
+        //}
+
+        public ICollection<Trans> Transactions
+        {
+            get; set;
+        }
     }
 }

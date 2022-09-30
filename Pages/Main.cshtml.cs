@@ -25,7 +25,7 @@ namespace HOTWallets.Pages
         [BindProperty]
         public Wallet Wallet
         {
-            get;set;
+            get; set;
         }
 
         [BindProperty]
@@ -50,21 +50,23 @@ namespace HOTWallets.Pages
         {
             get; set;
         }
-        
+
         public List<Card> Cards = new List<Card>();
 
         ICardDal _cardDal;
         IWalletDal _walletDal;
         ITransDal _transDal;
+        ICategoryDal _categoryDal;
         ICardWalletDal _cardWalletDal;
         private readonly IHubContext<AppHub> _hub;
         private readonly IRazorPartialToStringRenderer _renderer;
-        
-        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal, ICardWalletDal cardWalletDal, IHubContext<AppHub> hub, IRazorPartialToStringRenderer renderer)
+
+        public MainModel(ICardDal cardDal, IWalletDal walletDal, ITransDal transDal, ICardWalletDal cardWalletDal, ICategoryDal categoryDal, IHubContext<AppHub> hub, IRazorPartialToStringRenderer renderer)
         {
             _cardDal = cardDal;
             _walletDal = walletDal;
             _transDal = transDal;
+            _categoryDal = categoryDal;
             _cardWalletDal = cardWalletDal;
             _hub = hub;
             _renderer = renderer;
@@ -84,7 +86,7 @@ namespace HOTWallets.Pages
         public IActionResult OnGetGetWallet(int id)
         {
             Wallet = _walletDal.GetById(id);
-            TransList = _transDal.GetTranssesByWalletId(id);
+            //TransList = _transDal.GetTranssesByWalletId(id);
             Card = _cardDal.GetById(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             return Partial("_WalletDetail", this);
         }
@@ -95,19 +97,42 @@ namespace HOTWallets.Pages
             return Partial("_EditProfile", Card);
         }
 
-        public IActionResult OnGetExpense(int cardId, int walletId)
+        public IActionResult OnGetAddTrans(int cardId, int walletId, string type)
         {
             Card = _cardDal.GetById(cardId);
             Wallet = _walletDal.GetById(walletId);
-            return Partial("_ExpenseAdd", this);
+            Trans = new Trans { Type = type };
+            return Partial("_TransAdd", this);
         }
+
+
 
         public IActionResult OnPostSaveExpense()
         {
             //Type 1 girdi, type 2 çýktý
-            Category.Icon = Category.Id.ToString();
-            Category.Type = 2;
-            return Partial("");
+
+            Trans.CategoryId = Category.Id;
+            Trans.CardId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            _transDal.Add(Trans);
+
+            var wallet = _walletDal.GetById(Trans.WalletId);
+
+            if (Trans.Type == "Expense")
+            {
+                wallet.Balance = (decimal)(wallet.Balance - Trans.Price);
+            } else
+            {
+                wallet.Balance = (decimal)(wallet.Balance + Trans.Price);
+            }
+            _walletDal.Update(wallet);
+
+            return OnGetGetWallet(wallet.Id);
+        }
+
+        public IActionResult OnGetCancelExpenseAdd(int walletId)
+        {
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("_CancelAddExpense");
         }
 
         public IActionResult OnPostCreateWallet()
@@ -146,7 +171,7 @@ namespace HOTWallets.Pages
         }
 
         public IActionResult OnGetCancelEditProfile(string card)
-        {   
+        {
             return Partial("_ProfileInfo", JsonSerializer.Deserialize<MainPageDataModel>(card));
         }
 

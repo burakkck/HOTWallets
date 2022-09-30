@@ -18,6 +18,13 @@
         {
             get; set;
         }
-        
+        public int AccountId
+        {
+            get; set;
+        }
+        public List<Trans> Transactions
+        {
+            get; set;
+        }
     }
 }

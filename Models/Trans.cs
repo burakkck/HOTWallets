@@ -10,11 +10,11 @@
         {
             get; set;
         }
-        public decimal Price
+        public decimal? Price
         {
             get; set;
         }
-        public int Type
+        public string Type
         {
             get; set;
         }
@@ -24,9 +24,21 @@
         }
         public int WalletId
         {
-            get;set;
+            get; set;
         }
         public int CategoryId
+        {
+            get; set;
+        }
+        public Card Card
+        {
+            get; set;
+        }
+        public Wallet Wallet
+        {
+            get; set;
+        }
+        public Category Category
         {
             get; set;
         }

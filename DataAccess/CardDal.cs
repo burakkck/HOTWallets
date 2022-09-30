@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using HOTWallets.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HOTWallets.DataAccess
 {
@@ -27,7 +28,12 @@ namespace HOTWallets.DataAccess
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Set<Card>().SingleOrDefault(filter);
+                return context.Card
+                    .Include(x=> x.CardWallets)
+                    .ThenInclude(cw => cw.Wallet)
+                    .Where(filter).FirstOrDefault();
+                //return context.Card.Where(filter).FirstOrDefault();
+                //return context.Set<Card>().SingleOrDefault(filter);
             }
         }
 
@@ -61,6 +67,7 @@ namespace HOTWallets.DataAccess
             using (var context = new HotWalletsContext())
             {
                 return context.Wallet.Where(x => x.Id == walletId).FirstOrDefault().CardWallets.Where(w => w.WalletId == walletId).Select(x => x.Card).ToList();
+                //return context.Wallet.Where(x => x.Id == walletId).FirstOrDefault().Cards.ToList();
             }
         }
 
@@ -70,6 +77,12 @@ namespace HOTWallets.DataAccess
             {
                 var updatedEntity = context.Entry(card);
                 updatedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                //var entity = GetById(card.Id);
+                //context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                //updatedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                //context.Entry(entity).CurrentValues.SetValues(card);
+
                 context.SaveChanges();
             }
         }

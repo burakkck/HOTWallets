@@ -10,11 +10,11 @@
         {
             get; set;
         }
-        public Card Card
+        public virtual Card Card
         {
             get; set;
         }
-        public Wallet Wallet
+        public virtual Wallet Wallet
         {
             get; set;
         }

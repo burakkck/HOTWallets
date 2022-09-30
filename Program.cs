@@ -36,6 +36,7 @@ builder.Services.AddScoped<ICardDal, CardDal>();
 builder.Services.AddScoped<IWalletDal, WalletDal>();
 builder.Services.AddScoped<ITransDal, TransDal>();
 builder.Services.AddScoped<ICardWalletDal, CardWalletDal>();
+builder.Services.AddScoped<ICategoryDal, CategoryDal>();
 
 builder.Services.AddHttpContextAccessor();
 

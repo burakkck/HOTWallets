@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace HOTWallets.Models
 {
@@ -32,10 +33,15 @@ namespace HOTWallets.Models
         {
             get; set;
         } = "Admin";
-        public ICollection<CardWallet> CardWallets
+        public virtual ICollection<CardWallet> CardWallets
         {
             get; set;
         } = new List<CardWallet>();
+
+        //public virtual ICollection<Wallet> Wallets
+        //{
+        //    get; set;
+        //}
     }
 
     public class Cards : List<Card>

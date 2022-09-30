@@ -7,9 +7,9 @@ namespace HOTWallets.DataAccess
     {
         Category Get(Expression<Func<Category, bool>> filter);
         Category GetById(int id);
-        IList<Category> GetCategorysByWalletId(int walletId);
-        void Add(Category Category);
-        void Update(Category Category);
-        void Delete(Category Category);
+        List<Category> GetCategoriesByAccountId(int walletId);
+        void Add(Category category);
+        void Update(Category category);
+        void Delete(Category category);
     }
 }

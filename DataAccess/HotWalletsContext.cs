@@ -6,9 +6,9 @@ namespace HOTWallets.DataAccess
     public class HotWalletsContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(connectionString:@"Server=(local); Database=HotWallets;Trusted_Connection=true");            
-        }
+            => optionsBuilder
+                .UseSqlServer(connectionString:@"Server=(local); Database=HotWallets;Trusted_Connection=true");
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CardWallet>()

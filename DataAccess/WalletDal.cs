@@ -30,7 +30,7 @@ namespace HOTWallets.DataAccess
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Wallet.FirstOrDefault(filter);
+                return context.Wallet.Include(x => x.Transactions).FirstOrDefault(filter);
             }
         }
 
@@ -46,7 +46,12 @@ namespace HOTWallets.DataAccess
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Wallet.Where(x => x.Id == id).FirstOrDefault();
+                return context.Wallet
+                    .Include(w => w.Transactions)
+                    .ThenInclude(t => t.Category)
+                    .Include(wlt => wlt.Transactions)
+                    .ThenInclude(tr => tr.Card)
+                    .Where(x => x.Id == id).FirstOrDefault();
             }
         }
 
@@ -61,12 +66,15 @@ namespace HOTWallets.DataAccess
                 //Cwallets = context.CardsWallets.Where(i => i.CardId == cardId).ToList(); //.Select(x => x.WalletId).ToList().ForEach(x => wallets.Add(context.Wallet.Where(y => y.Id == Convert.ToInt32(x))));
 
 
-                var query = from wallet in context.Wallet
-                            join cw in context.CardsWallets on wallet.Id equals cw.WalletId
-                            where cw.CardId == cardId
-                            select wallet;
+                return context.CardsWallets.Include(cw => cw.Wallet).Where(q => q.CardId == cardId).Select(s => s.Wallet).ToList();
 
-                return query.OrderBy(i => i.Id).ToList();
+
+                //var query = from wallet in context.Wallet
+                //            join cw in context.CardsWallets on wallet.Id equals cw.WalletId
+                //            where cw.CardId == cardId
+                //            select wallet;
+
+                //return query.OrderBy(i => i.Id).ToList();
             }
         }
 
