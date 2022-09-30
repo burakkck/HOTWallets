@@ -2,10 +2,7 @@
 @*
 For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-    CardDal cardDal = new CardDal();
-    var card = cardDal.GetById(1011);
-}
+
 @model MainModel
 
 <turbo-frame id="new_transaction">
@@ -617,8 +614,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
             <input type="hidden" asp-for="@Model.Trans.WalletId" value="@Model.Wallet.Id" />
             <div class="flex flex-row gap-2">
-                <a asp-page="/Main" asp-page-handler="CancelExpenseAdd" asp-route-walletId="@Model.Wallet.Id" class="w-auto py-2 px-10 text-md bg-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">Cancel</a>
-                <input asp-page="/Main" asp-page-handler="SaveExpense" data-turbo-frame="main-frame" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
+                <a asp-page="/Main" asp-page-handler="CancelTransAdd" asp-route-walletId="@Model.Wallet.Id" class="w-auto py-2 px-10 text-md bg-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">Cancel</a>
+                <input asp-page="/Main" asp-page-handler="SaveTrans" data-turbo-frame="main-frame" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
             </div>
         </div>
     </form>

@@ -106,8 +106,7 @@ namespace HOTWallets.Pages
         }
 
 
-
-        public IActionResult OnPostSaveExpense()
+        public IActionResult OnPostSaveTrans()
         {
             //Type 1 girdi, type 2 çýktý
 
@@ -129,10 +128,10 @@ namespace HOTWallets.Pages
             return OnGetGetWallet(wallet.Id);
         }
 
-        public IActionResult OnGetCancelExpenseAdd(int walletId)
+        public IActionResult OnGetCancelTransAdd(int walletId)
         {
             Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("_CancelAddExpense");
+            return Partial("_CancelAddTrans");
         }
 
         public IActionResult OnPostCreateWallet()
