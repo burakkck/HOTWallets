@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using HOTTranss.DataAccess;
 using HOTWallets.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HOTWallets.DataAccess
 {
@@ -43,11 +44,14 @@ namespace HOTWallets.DataAccess
             }
         }
 
-        public Trans TransById(int id)
+        public Trans GetTransById(int id)
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Trans.Where(x => x.Id == id).FirstOrDefault();
+                return context.Trans
+                    .Include(t => t.Category)
+                    .Include(t => t.Card)
+                    .Where(x => x.Id == id).FirstOrDefault();
             }
         }
 

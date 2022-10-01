@@ -6,7 +6,7 @@ namespace HOTTranss.DataAccess
     public interface ITransDal
     {
         Trans Get(Expression<Func<Trans, bool>> filter);
-        Trans TransById(int id);
+        Trans GetTransById(int id);
         List<Trans> GetTranssesByWalletId(int id);
         void Add(Trans trans);
         void Update(Trans trans);

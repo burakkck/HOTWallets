@@ -5,7 +5,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
 @model MainModel
 
-<turbo-frame id="new_transaction">
+<turbo-frame id="transaction_@Model.Trans.Id">
     <form class="flex justify-center flex-col mt-6 p-5 w-full" accept-charset="UTF-8" method="post">
         <input type="hidden" name="authenticity_token" value="WLu7vMOnLx72HkIQ41IjSGsy3uNi753cezEiVBDQ9-DJpawULO_ezQWReo-CIQGN7OaMtWkqyKnmbsWeK_p8vg" autocomplete="off">
         <div class="flex flex-col items-center w-full gap-4">
@@ -15,7 +15,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                     @*<input type="hidden" name="transaction[category_id]" value="" autocomplete="off">*@
 
                     <label class="relative flex items-center gap-1 mb-4" for="transaction_category_id_1336">
-                        <input type="radio" checked value="1"  asp-for="@Model.Category.Id" id="transaction_category_id_1336">
+                        <input type="radio" value="1" asp-for="@Model.Category.Id" id="transaction_category_id_1336">
                         <div class="flex flex-col justify-center items-center w-16 h-16" id="categories">
                             <!--?xml version="1.0" encoding="iso-8859-1"?-->
                             <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -600,6 +600,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                     </label>
                 </div>
             </div>
+            <input type="hidden" asp-for="@Model.Trans.Id" />
             <div class="flex flex-col items-center w-full">
                 <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="transaction_transaction_type">Transaction type</label>
                 <input readonly="readonly" value="@Model.Trans.Type" class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" asp-for="@Model.Trans.Type" id="transaction_transaction_type">
@@ -610,11 +611,11 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
             <div class="flex flex-col items-center w-full">
                 <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="transaction_price">Price</label>
-                <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="number" asp-for="@Model.Trans.Price" id="transaction_price">
+                <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="number" step=".01" asp-for="@Model.Trans.Price" value=@Model.Trans.Price?.ToString(System.Globalization.CultureInfo.InvariantCulture) id="transaction_price">
             </div>
             <input type="hidden" asp-for="@Model.Trans.WalletId" value="@Model.Wallet.Id" />
             <div class="flex flex-row gap-2">
-                <a asp-page="/Main" asp-page-handler="CancelTransAdd" asp-route-walletId="@Model.Wallet.Id" class="w-auto py-2 px-10 text-md bg-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">Cancel</a>
+                <a asp-page="/Main" asp-page-handler="CancelTransAdd" asp-route-walletId="@Model.Wallet.Id" asp-route-transid="@Model.Trans.Id" class="w-auto py-2 px-10 text-md bg-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer">Cancel</a>
                 <input asp-page="/Main" asp-page-handler="SaveTrans" data-turbo-frame="main-frame" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
             </div>
         </div>

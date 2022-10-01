@@ -3,9 +3,17 @@
 *@
 @{
 }
+@model Models.Trans
 
-<turbo-stream action="replace" target="new_transaction">
+<turbo-stream action="replace" target="transaction_@Model.Id">
     <template>
-        <turbo-frame id="new_transaction"></turbo-frame>
+        @if (Model.Id > 0)
+        {
+            <partial name="_WalletTransaction" model="@Model"></partial>
+        }else
+        {
+            <turbo-frame id="transaction_@Model.Id"></turbo-frame>
+        }
+        
     </template>
 </turbo-stream>

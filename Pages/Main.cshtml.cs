@@ -11,6 +11,7 @@ using HOTWallets.Hubs;
 using HOTWallets.Services;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
+using System.Globalization;
 
 namespace HOTWallets.Pages
 {
@@ -43,14 +44,17 @@ namespace HOTWallets.Pages
         public Trans Trans
         {
             get; set;
-        }
+        } = new Trans();
         [BindProperty]
         public Category Category
 
         {
             get; set;
         }
-
+        public string ConvertedPrice
+        {
+            get; set;
+        }
         public List<Card> Cards = new List<Card>();
 
         ICardDal _cardDal;
@@ -97,41 +101,87 @@ namespace HOTWallets.Pages
             return Partial("_EditProfile", Card);
         }
 
-        public IActionResult OnGetAddTrans(int cardId, int walletId, string type)
+        public IActionResult OnGetAddTrans(int cardId, int walletId, string type, int transid)
         {
+            if(transid > 0)
+            {
+                Trans = _transDal.GetTransById(transid);
+                //string convertedPrice = ((decimal)(Trans.Price)).ToString(CultureInfo.InvariantCulture);
+            } else
+            {
+                Trans.Type = type;
+            }
             Card = _cardDal.GetById(cardId);
             Wallet = _walletDal.GetById(walletId);
-            Trans = new Trans { Type = type };
+           
             return Partial("_TransAdd", this);
         }
 
 
         public IActionResult OnPostSaveTrans()
         {
+            Wallet wallet = new Wallet();
             //Type 1 girdi, type 2 çýktý
-
-            Trans.CategoryId = Category.Id;
-            Trans.CardId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            _transDal.Add(Trans);
-
-            var wallet = _walletDal.GetById(Trans.WalletId);
-
-            if (Trans.Type == "Expense")
+            if (Trans.Id == 0)
             {
-                wallet.Balance = (decimal)(wallet.Balance - Trans.Price);
+                Trans.CategoryId = Category.Id;
+                Trans.CardId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                _transDal.Add(Trans);
+
+                wallet = _walletDal.GetById(Trans.WalletId);
+
+                if (Trans.Type == "Expense")
+                {
+                    wallet.Balance = (decimal)(wallet.Balance - Trans.Price);
+                } else
+                {
+                    wallet.Balance = (decimal)(wallet.Balance + Trans.Price);
+                }
+                _walletDal.Update(wallet);
             } else
             {
-                wallet.Balance = (decimal)(wallet.Balance + Trans.Price);
+                Trans.CategoryId = Category.Id;
+                Trans.CardId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                _transDal.Update(Trans);
+
+                wallet = _walletDal.GetById(Trans.WalletId);
+                if (Trans.Type == "Expense")
+                {
+                    wallet.Balance = (decimal)(wallet.Balance - Trans.Price);
+                } else
+                {
+                    wallet.Balance = (decimal)(wallet.Balance + Trans.Price);
+                }
+                _walletDal.Update(wallet);
             }
-            _walletDal.Update(wallet);
+
 
             return OnGetGetWallet(wallet.Id);
         }
 
-        public IActionResult OnGetCancelTransAdd(int walletId)
+        public IActionResult OnGetDeleteTransaction(int id, int walletid)
         {
+            var transaction = _transDal.GetTransById(id);
+            var wallet = _walletDal.GetById(walletid);
+            if(transaction.Type == "Expense")
+            {
+                wallet.Balance = (decimal)(wallet.Balance + transaction.Price);
+            } else
+            {
+                wallet.Balance = (decimal)(wallet.Balance - transaction.Price);
+            }
+            _walletDal.Update(wallet);
+            _transDal.Delete(transaction);
+
+            return OnGetGetWallet(walletid);
+
+        }
+
+        public IActionResult OnGetCancelTransAdd(int walletId, int transid)
+        {
+            Trans = _transDal.GetTransById(transid);
             Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("_CancelAddTrans");
+            return Partial("_CancelAddTrans", Trans);
         }
 
         public IActionResult OnPostCreateWallet()
