@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ZDfhbLjeNYaXGLf6beQ8O/igmvArIWQ2/qs5uB8cy9xXHTy1tpEeQ4HQ9wRABeG8daQCXmdpdBK4Xcj7InNQ3Q==",
+  "dgSpecHash": "5aSa74QkHHwQJcA57HoK4szL46xWf44d4wTelcMe7v2CJIdFn8H0X5EjxFkQpXUUWHjq0CTFo1/1pMxyjkxj2w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Burak\\source\\repos\\HOTWallets\\HOTWallets\\HOTWallets.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Burak\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\Burak\\.nuget\\packages\\htmlagilitypack\\1.11.46\\htmlagilitypack.1.11.46.nupkg.sha512",
     "C:\\Users\\Burak\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Burak\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Burak\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

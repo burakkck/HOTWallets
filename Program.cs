@@ -26,6 +26,7 @@ builder.Services.AddSession(options => {
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
+        options.Cookie.Name = "HotWallets";
         options.EventsType = typeof(CustomCookieAuthenticationEvents);
         options.LoginPath = "/Index";
         options.AccessDeniedPath = "/Index";
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IWalletDal, WalletDal>();
 builder.Services.AddScoped<ITransDal, TransDal>();
 builder.Services.AddScoped<ICardWalletDal, CardWalletDal>();
 builder.Services.AddScoped<ICategoryDal, CategoryDal>();
+builder.Services.AddScoped<IAccountDal, AccountDal>();
 
 builder.Services.AddHttpContextAccessor();
 

@@ -14,7 +14,8 @@
         {
             get; set;
         }
-        public int Type
+
+        public string Type
         {
             get; set;
         }

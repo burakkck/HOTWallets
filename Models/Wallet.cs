@@ -1,4 +1,6 @@
-﻿namespace HOTWallets.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HOTWallets.Models
 {
     public class Wallet
     {
@@ -10,6 +12,7 @@
         {
             get; set;
         }
+        
         public decimal Balance
         {
             get; set;

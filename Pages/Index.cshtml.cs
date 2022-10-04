@@ -79,6 +79,7 @@ namespace HOTWallets.Pages
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                     return RedirectToPage("Main", new { data = JsonSerializer.Serialize(dataModel) });
+                    //return RedirectToPage("Main", new { data = Card.Id.ToString() });
                 }
                 ViewData["errormessage"] = "Kullanıcı adı veya şifre hatalı";
 
@@ -91,7 +92,8 @@ namespace HOTWallets.Pages
         public IActionResult OnPostCreateAcc()
         {
             Wallet wallet = new Wallet { Name = "My Wallet", Balance = 0,  };
-
+            Account account = new Account { Name = Card.Username };
+            Card.Account = account;
             Card.CardWallets.Add(new CardWallet { Wallet = wallet });
             _cardDal.Add(Card);
             //_walletDal.Add(new Wallet {Balance = 0, Name = "My Wallet" });

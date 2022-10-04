@@ -43,5 +43,9 @@ namespace HOTWallets.DataAccess
         {
             get; set;
         }
+        public DbSet<Account> Account
+        {
+            get; set;
+        }
     }
 }

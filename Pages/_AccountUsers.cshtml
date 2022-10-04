@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Models.Account
+
+<turbo-frame class="flex flex-col items-center" id="new_account_user">
+    <div class="flex gap-4 w-full overflow-x-auto justify-center overflow-visible pb-4">
+        <div class="flex items-center space-x-1 ">
+            <div class="flex flex-shrink-0 -space-x-2">
+
+                @foreach (var card in Model.Cards)
+                {
+                    <span class="inline-block relative z-10" data-action="mouseenter->tooltip#open mouseleave->tooltip#close">
+                        <div class="tooltip" data-tooltip-target="content" hidden="">
+                            @String.Format("{0} {1}", card.FirstName, card.LastName)
+                        </div>
+                        <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d] h-14 w-14 rounded-full bg-gray-400">
+                            <span class="text-sm font-medium leading-none text-white">@String.Format("{0}{1}", card.FirstName[0], card.LastName[0])</span>
+                        </span>
+                    </span>
+                }
+            </div>
+        </div>
+
+        <a asp-page="/Main" asp-page-handler="AddAccountUser" asp-route-accountId=@Model.Id class="p-4 text-xl bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold">
+            <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.882 251.882"><path d="M215.037 36.846c-49.129-49.128-129.063-49.128-178.191 0-49.127 49.127-49.127 129.063 0 178.19 24.564 24.564 56.83 36.846 89.096 36.846s64.531-12.282 89.096-36.846c49.126-49.127 49.126-129.063-.001-178.19zM49.574 202.309C7.465 160.2 7.465 91.683 49.574 49.574c21.055-21.054 48.711-31.582 76.367-31.582s55.313 10.527 76.367 31.582c42.109 42.109 42.109 110.626 0 152.735-42.109 42.108-110.625 42.108-152.734 0z"></path><path d="M194.823 116.941h-59.882V57.059c0-4.971-4.029-9-9-9s-9 4.029-9 9v59.882H57.059c-4.971 0-9 4.029-9 9s4.029 9 9 9h59.882v59.882c0 4.971 4.029 9 9 9s9-4.029 9-9v-59.882h59.882c4.971 0 9-4.029 9-9s-4.029-9-9-9z"></path></svg>
+        </a>
+    </div>
+</turbo-frame>

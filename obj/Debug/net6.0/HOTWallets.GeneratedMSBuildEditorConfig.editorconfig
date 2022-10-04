@@ -39,6 +39,34 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AccountCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FjY291bnRDYXRlZ29yaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AccountInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FjY291bnRJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AccountSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FjY291bnRTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AccountUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FjY291bnRVc2Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AddAccountUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FkZEFjY291bnRVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AddCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FkZENhdGVnb3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AddedAccountUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FkZGVkQWNjb3VudFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_AddedTran.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0FkZGVkVHJhbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -51,8 +79,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0NhbmNlbEFkZFRyYW5zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_CategoryIcons.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0NhdGVnb3J5SWNvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_ChangeUserInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0NoYW5nZVVzZXJJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_EditAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0VkaXRBY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/Burak/source/repos/HOTWallets/HOTWallets/Pages/_EditProfile.cshtml]

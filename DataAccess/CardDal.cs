@@ -37,11 +37,11 @@ namespace HOTWallets.DataAccess
             }
         }
 
-        public List<Card> GetAll()
+        public List<Card> GetAll(Expression<Func<Card, bool>> filter = null)
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Card.ToList();
+                return context.Card.Where(filter).ToList();
             }
         }
 

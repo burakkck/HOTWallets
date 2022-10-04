@@ -37,6 +37,14 @@ namespace HOTWallets.Models
         {
             get; set;
         } = new List<CardWallet>();
+        public int AccountId
+        {
+            get; set;
+        }
+        public Account Account
+        {
+            get; set;
+        }
 
         //public virtual ICollection<Wallet> Wallets
         //{

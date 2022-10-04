@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Models.Card
+
+<turbo-frame class="flex flex-col items-center" id="new_account_user">
+    <div class="flex flex-col justify-center items-center">
+        <form class="flex justify-center flex-col mt-6 w-full" accept-charset="UTF-8" method="post">
+            <input type="hidden" asp-for="@Model.AccountId" name="accountid" value="@Model.AccountId">
+
+            <div class="flex flex-col items-center w-full gap-4">
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_first_name">First name</label>
+                    <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="text" asp-for="@Model.FirstName" name="firstname" id="user_first_name">
+                </div>
+
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_last_name">Last name</label>
+                    <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" asp-for="@Model.LastName" type="text" name="lastname" id="user_last_name">
+                </div>
+
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="username">Username</label>
+                    <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" asp-for="@Model.Username" type="text" name="username" autocomplete="off" id="username">
+                </div>
+
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_email">Email</label>
+                    <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="email" asp-for="@Model.Email" name="email" id="user_email">
+                </div>
+
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_role">Role</label>
+                    <select class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" asp-for="@Model.Role" name="role" id="user_role">
+                        <option selected="selected" value="admin">admin</option>
+                        <option value="member">member</option>
+                    </select>
+
+                </div>
+
+                <div class="flex flex-col items-center w-full">
+                    <label class="font-bold text-transparent text-md bg-clip-text p-2 text-black from-[#CE00D2] to-zinc-700 w-full" for="user_password">Password</label>
+                    <input class="border-2 border-gray-400 rounded-full w-full px-6 text-xl" type="password" name="password" autocomplete="off" id="user_password">
+                </div>
+
+                <input asp-page="/Main" asp-page-handler="SaveAccountUser" type="submit" name="commit" value="Save" class="w-auto py-2 px-10 text-md bg-gradient-to-r from-[#CE00D2] to-gray-400 rounded-full text-white font-bold mt-4 cursor-pointer" data-disable-with="Save">
+
+            </div>
+        </form>
+        <a asp-page="/Main" asp-page-handler="CancelAddAccountUser" asp-route-accountId="@Model.AccountId" class="mt-2 text-fuchsia-600">Cancel</a>
+    </div>
+</turbo-frame>

@@ -31,6 +31,14 @@ namespace HOTWallets.DataAccess
             }
         }
 
+        public List<Category> GetByType(Expression<Func<Category, bool>> filter)
+        {
+            using (HotWalletsContext context = new HotWalletsContext())
+            {
+                return context.Category.Where(filter).ToList();
+            }
+        }
+
         public Category GetById(int id)
         {
             using (HotWalletsContext context = new HotWalletsContext())
