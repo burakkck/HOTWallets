@@ -6,7 +6,8 @@
 
 @model Models.Account
 
-<turbo-frame id="main-frame">
+<partial name="_Navbar"></partial>
+@*<turbo-frame id="main-frame">*@
     <main class="mt-5">
         <section class="flex justify-center items-center mt-12 mb-16 w-full ">
             <div class="w-screen rounded-[50px] bg-gray-300/50 flex flex-col justify-start items-center p-8 gap-y-6 max-w-screen-2xl">
@@ -32,4 +33,4 @@
         </section>
 
     </main>
-</turbo-frame>
+@*</turbo-frame>*@

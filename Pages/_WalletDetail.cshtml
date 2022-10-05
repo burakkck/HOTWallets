@@ -5,7 +5,7 @@
 }
 @model HOTWallets.Pages.MainModel
 
-
+<partial name="_Navbar"></partial>
 
 <turbo-frame id="main-frame">
     <main class="container mx-auto mt-5 px-5">
@@ -14,9 +14,9 @@
             <aside class="flex flex-col bg-gray-100 rounded-tl-[50px] rounded-bl-[50px] px-4 py-6">
                 <div class="flex items-center flex-col mt-6 w-96">
                     <div class="flex justify-between text-center px-10 gap-10">
-                        <a asp-page="/Main" asp-page-handler="AddTrans" asp-route-cardId="@Model.Card.Id" asp-route-walletId="@Model.Wallet.Id" asp-route-type="Expense" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-red-800 basis-1/2" data-turbo-frame="transaction_0">-</a>
+                        <a asp-page="/Main" asp-page-handler="AddTrans" asp-route-cardId="@Model.Card.Id" asp-route-walletId="@Model.Wallet.Id" asp-route-type="expense" class="flex justify-center py-2 px-[18px] text-xl font-medium rounded-full text-white bg-red-800 basis-1/2" data-turbo-frame="transaction_0">-</a>
 
-                        <a asp-page="/Main" asp-page-handler="AddTrans" asp-route-cardId="@Model.Card.Id" asp-route-walletId="@Model.Wallet.Id" asp-route-type="Income" class="flex justify-center py-2 px-5 text-xl font-medium rounded-full text-white bg-green-800 basis-1/2" data-turbo-frame="transaction_0">+</a>
+                        <a asp-page="/Main" asp-page-handler="AddTrans" asp-route-cardId="@Model.Card.Id" asp-route-walletId="@Model.Wallet.Id" asp-route-type="income" class="flex justify-center py-2 px-4 text-xl font-medium rounded-full text-white bg-green-800 basis-1/2" data-turbo-frame="transaction_0">+</a>
                     </div>
                     <div class="overflow-y-scroll w-full h-[calc(100vh-288px)]">
                         <turbo-frame id="index_transaction">

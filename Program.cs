@@ -18,21 +18,22 @@ builder.Services.AddRazorPages(
     );
 
 
-builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.IsEssential = true;
-    options.Cookie.HttpOnly = true;
-});
+//builder.Services.AddSession(options =>
+//{
+//    options.IdleTimeout = TimeSpan.FromMinutes(30);
+//    options.Cookie.IsEssential = true;
+//    options.Cookie.HttpOnly = true;
+//});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
         options.Cookie.Name = "HotWallets";
-        options.EventsType = typeof(CustomCookieAuthenticationEvents);
+        //options.EventsType = typeof(CustomCookieAuthenticationEvents);
         options.LoginPath = "/Index";
         options.AccessDeniedPath = "/Index";
     });
 
-builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
+//builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 builder.Services.AddScoped<ICardDal, CardDal>();
 builder.Services.AddScoped<IWalletDal, WalletDal>();
 builder.Services.AddScoped<ITransDal, TransDal>();
@@ -64,7 +65,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSession();
+//app.UseSession();
 
 app.MapRazorPages();
 

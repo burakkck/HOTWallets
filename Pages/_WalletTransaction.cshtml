@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="text-4xl font-bold mt-4">
-            @(Model.Type == "Expense" ? String.Format("-₺{0}", Model.Price) : String.Format("+₺{0}", Model.Price))
+            @(Model.Type == "expense" ? String.Format("-₺{0}", Model.Price) : String.Format("+₺{0}", Model.Price))
         </div>
 
         <div>

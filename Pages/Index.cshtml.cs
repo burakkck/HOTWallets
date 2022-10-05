@@ -18,11 +18,11 @@ namespace HOTWallets.Pages
         public Card Card
         {
             get; set;
-        }
+        } = new Card();
         public List<Wallet> Wallets
         {
             get; set;
-        }
+        } = new List<Wallet>();
 
         private ICardDal _cardDal;
         private IWalletDal _walletDal;
@@ -33,9 +33,13 @@ namespace HOTWallets.Pages
             _walletDal = walletDal;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("Main");
+            }
+            return Page();
         }
 
         public IActionResult OnGetSignUp()
@@ -50,18 +54,20 @@ namespace HOTWallets.Pages
             {
                 if (_cardDal.CardCheck(x=> x.Username == username && x.Password == password, out var card))
                 {
-                    Card = card;
-                    //Card = _cardDal.Get(x => x.Username == username && x.Password == password);
-                    var result = _walletDal.GetWalletsByCardId(Card.Id);
-                    MainPageDataModel dataModel = new MainPageDataModel
-                    {
-                        Id = Card.Id,
-                        FirstName = Card.FirstName,
-                        LastName = Card.LastName,
-                        Email = Card.Email,
-                        Username = Card.Username
-                    };
-                    dataModel.Wallets = result;
+                    //Card = card;
+                    ////Card = _cardDal.Get(x => x.Username == username && x.Password == password);
+                    //var result = _walletDal.GetWalletsByCardId(Card.Id);
+                    //MainPageDataModel dataModel = new MainPageDataModel
+                    //{
+                    //    Id = Card.Id,
+                    //    FirstName = Card.FirstName,
+                    //    LastName = Card.LastName,
+                    //    Email = Card.Email,
+                    //    Username = Card.Username
+                    //};
+                    //dataModel.Wallets = result;
+
+
                     //HttpContext.Session.Set<MainPageDataModel>("userinfo", dataModel);
                     //MainPageDataModel model = HttpContext.Session.Get<MainPageDataModel>("userinfo");
 
@@ -69,8 +75,8 @@ namespace HOTWallets.Pages
 
                     var claims = new List<Claim>
                     {
-                        new Claim (ClaimTypes.NameIdentifier, Card.Id.ToString()),
-                        new Claim (ClaimTypes.Name, Card.Username),
+                        new Claim (ClaimTypes.NameIdentifier, card.Id.ToString()),
+                        new Claim (ClaimTypes.Name, card.Username),
                         new Claim (ClaimTypes.Role, "Admin")
                     };
 
@@ -78,7 +84,7 @@ namespace HOTWallets.Pages
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToPage("Main", new { data = JsonSerializer.Serialize(dataModel) });
+                    return RedirectToPage("Main");
                     //return RedirectToPage("Main", new { data = Card.Id.ToString() });
                 }
                 ViewData["errormessage"] = "Kullanıcı adı veya şifre hatalı";
@@ -87,6 +93,13 @@ namespace HOTWallets.Pages
             }
 
             return Page();
+        }
+
+        public IActionResult OnGetSignOut()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            //HttpContext.Session.Clear();
+            return RedirectToPage("Index");
         }
 
         public IActionResult OnPostCreateAcc()

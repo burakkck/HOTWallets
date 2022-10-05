@@ -62,7 +62,9 @@ namespace HOTWallets.Pages
             get; set;
         }
         public List<Card> AccountCards = new List<Card>();
+        public List<Wallet> CardWallets = new List<Wallet>();
         public List<Category> Categories = new List<Category>();
+
 
         ICardDal _cardDal;
         IWalletDal _walletDal;
@@ -85,16 +87,11 @@ namespace HOTWallets.Pages
             _renderer = renderer;
         }
 
-        public void OnGet(string data)
+        public void OnGet()
         {
-            MainPageDataModel = JsonSerializer.Deserialize<MainPageDataModel>(data);
-            //if (String.IsNullOrWhiteSpace(HttpContext.Session.GetString("Cardname")))
-            //{
-            //    return RedirectToPage("Index");
-            //}
-            //return Page();
-            var currentUser = _cardDal.GetById(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-            AccountCards = _cardDal.GetAll(x=> x.AccountId == currentUser.AccountId);
+            Card = _cardDal.Get(x=> x.Id == Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            CardWallets = _walletDal.GetWalletsByCardId(Card.Id);
+            AccountCards = _cardDal.GetAll(x=> x.AccountId == Card.AccountId);
         }
 
         public IActionResult OnGetGetWallet(int id)
@@ -195,7 +192,7 @@ namespace HOTWallets.Pages
 
                 wallet = _walletDal.GetById(Trans.WalletId);
 
-                if (Trans.Type == "Expense")
+                if (Trans.Type == "expense")
                 {
                     wallet.Balance = (decimal)(wallet.Balance - Trans.Price);
                 } else
@@ -213,7 +210,7 @@ namespace HOTWallets.Pages
 
                 wallet = _walletDal.GetById(Trans.WalletId);
                 
-                if (Trans.Type == "Expense")
+                if (Trans.Type == "expense")
                 {
                     wallet.Balance = (decimal)(wallet.Balance - diff);
                 } else
@@ -230,7 +227,7 @@ namespace HOTWallets.Pages
         {
             var transaction = _transDal.GetTransById(id);
             var wallet = _walletDal.GetById(walletid);
-            if(transaction.Type == "Expense")
+            if(transaction.Type == "expense")
             {
                 wallet.Balance = (decimal)(wallet.Balance + transaction.Price);
             } else
@@ -290,8 +287,16 @@ namespace HOTWallets.Pages
                 _categoryDal.Add(Category);
             }
             
+            //TO DO use turbo stream
             Account = _accountDal.GetAccountById(Category.AccountId);
+            //return Partial("_AddedCategory", Category);
             return Partial("_AccountCategories", Account);
+        }
+
+        public IActionResult OnGetShowWallet(int id)
+        {
+            Wallet = _walletDal.GetById(id);
+            return Partial("_ShowWallet", Wallet);
         }
 
         public IActionResult OnGetEditCategory(int categoryId)
@@ -300,25 +305,16 @@ namespace HOTWallets.Pages
             return Partial("_AddCategory", Category);
         }
 
-        public IActionResult OnGetSignOut()
+        public IActionResult OnGetCancelAddEditCategory(int accountId)
         {
-            if (HttpContext.Request.Cookies.Count > 0)
-            {
-                var siteCookies = HttpContext.Request.Cookies.Where(c => c.Key.Contains(".AspNetCore.") || c.Key.Contains("Microsoft.Authentication"));
-                foreach (var cookie in siteCookies)
-                {
-                    Response.Cookies.Delete(cookie.Key);
-                }
-            }
-
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            HttpContext.Session.Clear();
-            return RedirectToPage("/Index");
+            Account = _accountDal.GetAccountById(accountId);
+            return Partial("_AccountCategories", Account);
         }
 
-        public IActionResult OnGetCancelEditProfile(string card)
+        public IActionResult OnGetCancelEditProfile(int cardId)
         {
-            return Partial("_ProfileInfo", JsonSerializer.Deserialize<MainPageDataModel>(card));
+            Card = _cardDal.GetById(cardId);
+            return Partial("_ProfileInfo", Card);
         }
 
         public IActionResult OnPostEditAcc()
@@ -326,7 +322,7 @@ namespace HOTWallets.Pages
             Card.AccountId = _accountDal.GetAccountByCardId(Card.Id).Id;
             _cardDal.Update(Card);
             Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("_ChangeUserInfo", MainPageDataModel);
+            return Partial("_ChangeUserInfo", Card);
             //return Partial("_ProfileInfo", MainPageDataModel);
         }
     }

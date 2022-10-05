@@ -44,7 +44,7 @@
                 </div>
 
             </form>
-            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-route-card="@System.Text.Json.JsonSerializer.Serialize(Model)" asp-page-handler="CancelEditProfile">Cancel</a>
+            <a class="mt-2 text-fuchsia-600" asp-page="/Main" asp-route-cardId="@Model.Id" asp-page-handler="CancelEditProfile">Cancel</a>
         </div>
     </turbo-frame>
 </small>
