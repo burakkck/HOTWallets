@@ -1,0 +1,22 @@
+﻿@using HOTWallets.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model List<Wallet>
+
+<turbo-frame id="my_wallets">
+
+    
+        @foreach (var wallet in Model)
+        {
+        @*<div class="border border-gray-400 flex flex-col justify-center items-center p-2 hover:bg-gray-100/75 hover:border-2 group">*@
+        <a asp-page="/Main" asp-page-handler="GetWallet" asp-route-id="@wallet.Id" data-turbo-frame="_top" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >
+                @*<div class="border-2 border-gray-400 w-72 h-72 rounded-[64px] flex flex-col justify-center items-center p-8 hover:bg-gray-100/75 hover:border-4 group">*@
+                    <p class="text-sm text-gray-800 text-center group-hover:text-black mb-1">@wallet.Name</p>
+                @*</div>*@
+            </a>
+        @*</div>*@
+        }
+    
+</turbo-frame>

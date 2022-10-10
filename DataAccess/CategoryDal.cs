@@ -27,11 +27,11 @@ namespace HOTWallets.DataAccess
         {
             using (HotWalletsContext context = new HotWalletsContext())
             {
-                return context.Category.Where(filter).FirstOrDefault();
+                return context.Category.FirstOrDefault(filter);
             }
         }
 
-        public List<Category> GetByType(Expression<Func<Category, bool>> filter)
+        public List<Category> GetByAccountAndType(Expression<Func<Category, bool>> filter)
         {
             using (HotWalletsContext context = new HotWalletsContext())
             {
@@ -43,7 +43,7 @@ namespace HOTWallets.DataAccess
         {
             using (HotWalletsContext context = new HotWalletsContext())
             {
-                return context.Category.Where(x => x.Id == id).FirstOrDefault();
+                return context.Category.FirstOrDefault(x => x.Id == id);
             }
         }
 

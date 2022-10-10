@@ -1,0 +1,35 @@
+﻿@page
+@model HOTWallets.Pages.AccountSettingsModel
+@{
+  
+}
+
+
+@*<turbo-frame id="main-frame">*@
+    <main class="mt-5">
+        <section class="flex justify-center items-center mt-12 mb-16 w-full ">
+            <div class="w-screen rounded-[50px] bg-gray-300/50 flex flex-col justify-start items-center p-8 gap-y-6 max-w-screen-2xl">
+                <h1 class="font-bold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-[#CE00D2] to-zinc-700 p-2">
+                    Account Management
+                </h1>
+
+                <partial name="_AccountInfo.cshtml" model="@Model.Account"></partial>
+
+                <div class="flex mt-6 items-center mb-8">
+                    <p class="text-3xl underline underline-offset-8">
+                        Account members
+                    </p>
+                </div>
+                <turbo-frame class="flex flex-col items-center" id="new_account_user">
+                    <partial name="_AccountUsers" model="@Model.Account"></partial>
+                </turbo-frame>
+                <span class="text-3xl mt-12 font-bold">
+                    Categories
+                </span>
+                <div class="h-[1px] border-b-1 bg-gray-400 text-center w-full"></div>
+                <partial name="_AccountCategories" model="@Model.Account"></partial>
+            </div>
+        </section>
+
+    </main>
+@*</turbo-frame>*@

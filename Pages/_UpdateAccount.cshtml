@@ -1,0 +1,24 @@
+﻿@using HOTWallets.DataAccess
+@using System.Security.Claims
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Models.Account
+
+@{
+    CardDal cardDal = new CardDal();
+    var card = cardDal.GetById(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+}
+
+<turbo-stream action="replace" target="account_@Model.Id">
+    <template>
+        <partial name="_AccountInfo.cshtml" model=@Model/>
+    </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="header_account_@Model.Id">
+    <template>
+        <partial name="_HeaderAccountName.cshtml" model="@card"/>
+    </template>
+</turbo-stream>

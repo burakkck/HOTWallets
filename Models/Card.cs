@@ -32,7 +32,7 @@ namespace HOTWallets.Models
         public string Role
         {
             get; set;
-        } = "Admin";
+        } = "admin";
         public virtual ICollection<CardWallet> CardWallets
         {
             get; set;
@@ -50,26 +50,6 @@ namespace HOTWallets.Models
         //{
         //    get; set;
         //}
-    }
-
-    public class Cards : List<Card>
-    {
-        private Cards()
-        {
-        }
-        private static Cards _Instance = null;
-        public static Cards Instance
-        {
-            get
-            {
-                if (_Instance == null)
-                {
-                    _Instance = new Cards();
-                    Instance.Add(new Card { FirstName = "Burak", LastName = "Küçük", Id = 1, Email = "burakkucuk@gmail.com", Username = "burakkucuk", Password = "1234567" });
-                }
-                return _Instance;
-            }
-        }
     }
 
 }

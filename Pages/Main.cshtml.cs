@@ -28,7 +28,7 @@ namespace HOTWallets.Pages
         public Wallet Wallet
         {
             get; set;
-        }
+        } = new Wallet();
 
         [BindProperty]
         public List<Trans> TransList
@@ -108,10 +108,11 @@ namespace HOTWallets.Pages
             return Partial("_EditProfile", Card);
         }
 
+        
         public IActionResult OnGetAccountSettings()
         {
             Account = _accountDal.GetAccountByCardId(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-            return Partial("_AccountSettings", Account);
+            return RedirectToPage("AccountSettings", new { Id = Account.Id});
         }
 
         public IActionResult OnGetEditAccount(int accountId)
@@ -120,10 +121,16 @@ namespace HOTWallets.Pages
             return Partial("_EditAccount", Account);
         }
 
-        public IActionResult OnPostSaveAccount()
+        public async Task<IActionResult> OnPostSaveAccount()
         {
             _accountDal.Update(Account);
-            return Partial("_AccountInfo", Account);
+
+            var renderedViewStr = await _renderer.RenderPartialToStringAsync("../Pages/_UpdateAccount", Account);
+            await _hub.Clients.All.SendAsync("AccountChanged", renderedViewStr);
+            return new EmptyResult();
+
+            //Response.ContentType = "text/vnd.turbo-stream.html";
+            //return Partial("_UpdateAccount", Account);
         }
 
         public IActionResult OnGetCancelAccount(int accountId, string name)
@@ -148,6 +155,21 @@ namespace HOTWallets.Pages
             return Partial("_AddedAccountUser", Account);
         }
 
+        public PartialViewResult OnGetAddWallet()
+        {
+            Account =  _accountDal.GetAccountByCardId(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            return Partial("_NewWallet", this);
+        }
+
+        public IActionResult OnGetWalletsForNavbar()
+        {
+            List<Wallet> list = new List<Wallet>();
+            list = _walletDal.GetWalletsByCardId(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+
+            //Wallet = _walletDal.GetById(walletId);
+            return Partial("_WalletsForNavbar", list);
+        }
+
         public IActionResult OnGetAddTrans(int cardId, int walletId, string type, int transid)
         {
             if (transid > 0)
@@ -159,12 +181,13 @@ namespace HOTWallets.Pages
                 Trans.Type = type;
             }
 
+            int accountId = _accountDal.GetAccountByCardId(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier))).Id;
             if (type == null)
             {
-                Categories = _categoryDal.GetByType(x => x.Type == Trans.Type);
+                Categories = _categoryDal.GetByAccountAndType(x => x.Type == Trans.Type && x.AccountId == accountId);
             } else
             {
-                Categories = _categoryDal.GetByType(x => x.Type == type);
+                Categories = _categoryDal.GetByAccountAndType(x => x.Type == type && x.AccountId == accountId);
             }
             
             Card = _cardDal.GetById(cardId);
@@ -253,7 +276,9 @@ namespace HOTWallets.Pages
         public IActionResult OnPostCreateWallet()
         {
             string users = Request.Form["userIds"];
+
             var userids = users.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            userids.Add(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             Wallet = _walletDal.Add(Wallet);
 
             foreach (var userid in userids)

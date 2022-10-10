@@ -54,20 +54,6 @@ namespace HOTWallets.Pages
             {
                 if (_cardDal.CardCheck(x=> x.Username == username && x.Password == password, out var card))
                 {
-                    //Card = card;
-                    ////Card = _cardDal.Get(x => x.Username == username && x.Password == password);
-                    //var result = _walletDal.GetWalletsByCardId(Card.Id);
-                    //MainPageDataModel dataModel = new MainPageDataModel
-                    //{
-                    //    Id = Card.Id,
-                    //    FirstName = Card.FirstName,
-                    //    LastName = Card.LastName,
-                    //    Email = Card.Email,
-                    //    Username = Card.Username
-                    //};
-                    //dataModel.Wallets = result;
-
-
                     //HttpContext.Session.Set<MainPageDataModel>("userinfo", dataModel);
                     //MainPageDataModel model = HttpContext.Session.Get<MainPageDataModel>("userinfo");
 
@@ -77,7 +63,7 @@ namespace HOTWallets.Pages
                     {
                         new Claim (ClaimTypes.NameIdentifier, card.Id.ToString()),
                         new Claim (ClaimTypes.Name, card.Username),
-                        new Claim (ClaimTypes.Role, "Admin")
+                        new Claim (ClaimTypes.Role, card.Role)
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

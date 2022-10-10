@@ -1,4 +1,5 @@
 ﻿@using HOTWallets.DataAccess
+@using HOTWallets.Utilities
 @*
 For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -20,7 +21,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             <div class="flex flex-col justify-center items-center w-16 h-16" id="categories">
                                 <!--?xml version="1.0" encoding="iso-8859-1"?-->
                                 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-                                <img class="w-8" src="~/dist/images/categories/@String.Format("{0}.svg", itemCategory.Icon)">
+                                @Html.Raw(Utils.GetCategoryIcons()[itemCategory.Icon])
+                                @*<img class="w-8" src="~/dist/images/categories/@String.Format("{0}.svg", itemCategory.Icon)">*@
                                 <p class="text-black mt-2 text-lg">@itemCategory.Name</p>
                             </div>
                         </label>

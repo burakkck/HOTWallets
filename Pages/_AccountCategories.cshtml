@@ -6,9 +6,6 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-
-}
 
 @model Models.Account
 
@@ -21,7 +18,8 @@
             {
                 <a asp-page="/Main" asp-page-handler="EditCategory" data-turbo-frame="new_account_category" asp-route-categoryId="@category.Id">
                     <div class="flex flex-col justify-center text-center items-center w-24 h-24" id="categories">
-                        <img class="w-16" src="~/dist/images/categories/@String.Format("{0}.svg", category.Icon)">
+                        @Html.Raw(Utils.GetCategoryIcons()[category.Icon])
+                        @*<img class="w-16" src="~/dist/images/categories/@String.Format("{0}.svg", category.Icon)">*@
                         <span class="text-black mt-2 text-lg">@category.Name</span>
                     </div>
                 </a>

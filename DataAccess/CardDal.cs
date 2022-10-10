@@ -58,7 +58,9 @@ namespace HOTWallets.DataAccess
         {
             using (var context = new HotWalletsContext())
             {
-                return context.Card.FirstOrDefault(x => x.Id == id);
+                return context.Card
+                    .Include(c => c.Account)
+                    .FirstOrDefault(x => x.Id == id);
             }
         }
 

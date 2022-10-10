@@ -6,7 +6,7 @@ namespace HOTWallets.DataAccess
     public interface ICategoryDal
     {
         Category Get(Expression<Func<Category, bool>> filter);
-        List<Category> GetByType(Expression<Func<Category, bool>> filter);
+        List<Category> GetByAccountAndType(Expression<Func<Category, bool>> filter);
         Category GetById(int id);
         List<Category> GetCategoriesByAccountId(int walletId);
         void Add(Category category);

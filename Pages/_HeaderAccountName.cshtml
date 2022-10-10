@@ -1,0 +1,11 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Models.Card
+
+<turbo-frame id="header_account_@Model.AccountId">
+    <a href="#">@Model.Account.Name</a>
+</turbo-frame>

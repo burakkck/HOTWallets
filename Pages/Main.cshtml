@@ -1,4 +1,5 @@
 ﻿@page
+@using HOTWallets.Hubs
 @model HOTWallets.Pages.MainModel
 @{
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -21,7 +22,7 @@
         <section class="flex justify-center flex-col items-center w-full pt-10">
             <div class="ml-2 w-96">
                 <div class="flex justify-center items-center">
-                    <turbo-frame id="newwallet_frame">
+                    <turbo-frame id="addwallet-frame">
                         <partial name="_AddWallet" model=@Model></partial>
                     </turbo-frame>
                 </div>
@@ -29,16 +30,17 @@
             </div>
             <div class="mt-10">
                 <turbo-frame id="wallets" class="grid grid-cols-3 gap-10">
-                    @*<div id="userwallets" >*@
                     @foreach (var wallet in Model.CardWallets)
                     {
                         <turbo-frame id="wallet_@wallet.Id" loading="lazy" src="/Main?id=@wallet.Id&handler=ShowWallet"></turbo-frame>
                     }
-                    @*</div>*@
                 </turbo-frame>
+
+                <signalr-turbo-stream hub=@($"/{nameof(AppHub)}") method="WalletBalanceChanged"></signalr-turbo-stream>
             </div>
 
         </section>
 
     </main>
 </turbo-frame>
+
