@@ -74,15 +74,20 @@
     </div>
     @if (checkAcc) 
     {
-        <div class="flex flex-1 justify-end">
-            <details aria-label="Dropdown" class="relative">
-                <summary role="button">
-                    <span class="inline-block relative z-10" data-action="mouseenter->tooltip#open mouseleave->tooltip#close">
+        <div data-controller="tooltip" class="flex flex-1 justify-end items-center">
+            <a class="flex justify-center items-center mr-2 border px-2 h-10 bg-blue-400 text-white rounded-md" data-turbo-frame="_top" href="/Stimulus">go stimulus</a>
+            <details aria-label="Dropdown" data-tooltip-target="detail"  data-action="tooltip#change" class="relative">
+                <summary role="button" >
+                    <span class="inline-block relative z-10" @*data-action="mouseenter->tooltip#open mouseleave->tooltip#close"*@>
                         <div class="tooltip" data-tooltip-target="content" hidden="">
                             @String.Format("{0} {1}", @card.FirstName, card.LastName)
                         </div>
-                        <span class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d] h-14 w-14 rounded-full bg-gray-400">
-                            <span class="text-m font-medium leading-none text-white">@String.Format("{0}{1}", @card.FirstName[0], @card.LastName[0])</span>
+                        <span data-tooltip-target="box" class="inline-flex items-center justify-center ring-1 border-2 ring-[#ffdb4d] h-14 w-14 rounded-full bg-gray-400">
+                            <span data-tooltip-target="info" @*data-action="mouseenter->tooltip#open mouseleave->tooltip#close"*@ class="text-m text-white font-medium leading-none">
+                                
+                                    @String.Format("{0}{1}", @card.FirstName[0], @card.LastName[0])
+                                
+                            </span>
                         </span>
                     </span>
 

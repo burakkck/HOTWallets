@@ -1,0 +1,12 @@
+﻿@page
+@model HOTWallets.Pages.StimulusModel
+@{
+}
+
+<div class="flex gap-2 justify-center items-center mt-10" data-controller="stimulus">
+    <input type="text" data-stimulus-target="source" />
+    <input type="text" data-stimulus-target="source" />
+    <button class="p-2 bg-red-500 text-white" data-action="click->stimulus#work">Tıkla</button>
+    <p data-stimulus-target="output"></p>
+    <p data-stimulus-target="output"></p>
+</div>
